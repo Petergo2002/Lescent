@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Creative Palette - Vibe Coding
+       Black: #000000 | Evergreen: #003927 | Imperial Blue: #0d2977 | Eggshell: #f6efdd | White: #ffffff
+    */
+    --background: 43 58% 92%;
+    /* Eggshell */
+    --foreground: 0 0% 0%;
+    /* Black */
+
+    --card: 0 0% 100%;
+    /* White */
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 161 100% 11%;
+    /* Evergreen */
+    --primary-foreground: 43 58% 92%;
+    /* Eggshell for text on Evergreen */
+
+    --secondary: 224 80% 26%;
+    /* Imperial Blue */
+    --secondary-foreground: 0 0% 100%;
+    /* White */
+
+    --muted: 43 30% 85%;
+    --muted-foreground: 161 50% 25%;
+
+    --accent: 224 80% 26%;
+    /* Imperial Blue */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 161 30% 80%;
+    --input: 161 30% 80%;
+    --ring: 161 100% 11%;
+
+    --radius: 0.5rem;
+  }
+
+  /* Force Dark Mode style even without class="dark" if desired, 
+     but we keep the variables mapped for consistency. 
+     The user wants a dark theme site. */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom Scrollbar for luxury feel */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--secondary));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
