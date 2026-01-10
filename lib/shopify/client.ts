@@ -1,7 +1,5 @@
-import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
 import { isShopifyError } from 'lib/type-guards';
 import { ensureStartsWith } from 'lib/utils';
-import { headers } from 'next/headers';
 
 // function to ensure env vars are read at runtime
 const getShopifyConfig = () => {
@@ -57,10 +55,10 @@ export async function shopifyFetch<T>({
             status: result.status,
             body
         };
-    } catch (e) {
+    } catch (e: unknown) {
         // Log the exact error content
         console.error('Shopify Fetch Error V2:');
-        console.error('Message:', e instanceof Error ? e.message : (e as any).message || e);
+        console.error('Message:', e instanceof Error ? e.message : String(e));
         console.error('Stack:', e instanceof Error ? e.stack : undefined);
         console.error('Request Details:', {
             endpoint, // Check if this is empty/malformed

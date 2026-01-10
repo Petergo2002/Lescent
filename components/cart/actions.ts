@@ -1,6 +1,6 @@
 'use server';
 
-import { addToCart, createCart, getCart, removeFromCart, updateCart } from 'lib/shopify';
+import { addToCart, createCart, removeFromCart, updateCart } from 'lib/shopify';
 import { cookies } from 'next/headers';
 
 export async function getCartId() {
@@ -15,7 +15,7 @@ export async function createCartAndSetCookie() {
     return cart;
 }
 
-export async function addItem(prevState: any, selectedVariantId: string | undefined) {
+export async function addItem(_prevState: unknown, selectedVariantId: string | undefined) {
     let cartId = await getCartId();
     let cart;
 
@@ -31,8 +31,7 @@ export async function addItem(prevState: any, selectedVariantId: string | undefi
         }
 
         cart = await addToCart(cartId, [{ merchandiseId: selectedVariantId, quantity: 1 }]);
-    } catch (e) {
-        console.error('Error adding to cart:', e);
+    } catch {
         // If the cart is invalid (e.g. expired), create a new one
         cart = await createCartAndSetCookie();
         cart = await addToCart(cart.id, [{ merchandiseId: selectedVariantId, quantity: 1 }]);
@@ -42,7 +41,7 @@ export async function addItem(prevState: any, selectedVariantId: string | undefi
 }
 
 export async function updateItemQuantity(
-    prevState: any,
+    _prevState: unknown,
     payload: {
         lineId: string;
         variantId: string;
@@ -69,12 +68,12 @@ export async function updateItemQuantity(
                 }
             ]);
         }
-    } catch (e) {
+    } catch {
         return 'Error updating item quantity';
     }
 }
 
-export async function removeItem(prevState: any, lineId: string) {
+export async function removeItem(_prevState: unknown, lineId: string) {
     const cartId = await getCartId();
 
     if (!cartId) {
@@ -83,7 +82,7 @@ export async function removeItem(prevState: any, lineId: string) {
 
     try {
         await removeFromCart(cartId, [lineId]);
-    } catch (e) {
+    } catch {
         return 'Error removing item from cart';
     }
 }

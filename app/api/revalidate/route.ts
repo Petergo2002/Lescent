@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
             message: 'Cache cleared successfully',
             timestamp: Date.now()
         });
-    } catch (err) {
+    } catch {
         return NextResponse.json({
             message: 'Error clearing cache'
         }, { status: 500 });

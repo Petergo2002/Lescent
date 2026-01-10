@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
-export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+export default function BlogPostPage({ params: _params }: { params: Promise<{ slug: string }> }) {
     // In a real app, fetch article by slug here
     // For now, we just render a generic "Coming Soon" or placeholder template
 

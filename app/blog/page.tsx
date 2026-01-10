@@ -75,7 +75,7 @@ export default function BlogPage() {
 
                 {/* Article Grid */}
                 <div className="grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-2">
-                    {ARTICLES.map((article, index) => (
+                    {ARTICLES.map((article, _index) => (
                         <Link
                             href={`/blog/${article.slug}`}
                             key={article.id}

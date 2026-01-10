@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 
 import Link from 'next/link';
-import { Search, ShoppingBag, User, Menu } from 'lucide-react';
+import { Search, Menu } from 'lucide-react';
 import { CartSheet } from 'components/cart/cart-sheet';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from 'components/ui/sheet';
 import { motion } from 'framer-motion';

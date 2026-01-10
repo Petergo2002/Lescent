@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import { ArrowRight, Star, Droplets } from 'lucide-react';
 import { Button } from 'components/ui/button';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 export function TimelineSection() {
     const containerRef = useRef<HTMLDivElement>(null);
