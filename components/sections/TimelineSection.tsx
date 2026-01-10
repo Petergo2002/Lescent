@@ -176,6 +176,7 @@ function TimelineItem({ align, title, subtitle, description, imageSrc, icon }: {
                         alt={title}
                         fill
                         className="object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+                        unoptimized
                     />
                     {/* Glass Overlay Border */}
                     <div className="absolute inset-0 border-[1px] border-white/10 z-20" />

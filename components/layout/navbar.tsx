@@ -43,21 +43,22 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
                     : "bg-transparent border-transparent py-4"
             )}
         >
-            <div className="container flex h-28 items-center justify-between">
-                {/* Logo */}
-                <Link href="/" className="flex items-center gap-2">
+            <div className="container flex h-20 items-center justify-between px-4 md:px-6">
+                {/* Logo - aligned to the left */}
+                <Link href="/" className="flex items-center flex-shrink-0">
                     <Image
                         src="/Logotype/trasnparentlogo.png"
                         alt="LESCENT"
-                        width={400}
-                        height={133}
-                        className="object-contain h-36 w-auto"
+                        width={280}
+                        height={93}
+                        className="object-contain h-24 w-auto"
                         priority
+                        unoptimized
                     />
                 </Link>
 
                 {/* Centered Links */}
-                <div className="hidden items-center gap-8 md:flex">
+                <div className="hidden items-center gap-8 md:flex absolute left-1/2 -translate-x-1/2">
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
