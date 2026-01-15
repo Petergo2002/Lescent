@@ -15,7 +15,7 @@ export function FeatureSection() {
                         viewport={{ once: true }}
                         className="max-w-xl font-serif text-4xl font-bold leading-tight text-foreground md:text-5xl"
                     >
-                        Elevate Your Senses with <span className="text-primary">Elysian Elegance</span>
+                        Upplev Lyxig Doft med <span className="text-primary">Lescent</span>
                     </motion.h2>
 
                     <motion.div
@@ -26,7 +26,7 @@ export function FeatureSection() {
                         className="flex flex-col items-start gap-6 md:items-end"
                     >
                         <p className="max-w-md text-muted-foreground md:text-right">
-                            Välkommen till höjdpunkten av doftlyx – Elysian Scents Signature Collection. En resa genom tid och rum.
+                            Välkommen till Lescent – handgjorda oljeparfymer från Sverige. Upptäck vår exklusiva kollektion.
                         </p>
                         <Button size="lg" className="group gap-2 rounded-full h-12 px-8">
                             Utforska Mer

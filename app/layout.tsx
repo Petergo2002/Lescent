@@ -55,9 +55,7 @@ export default async function RootLayout({
                             <h4 className="mb-4 font-medium">Kontakt & Företag</h4>
                             <ul className="space-y-2 text-sm text-muted-foreground">
                                 <li><strong>Lescent</strong></li>
-                                <li>Org.nr: 559000-0000</li>
-                                <li>Storgatan 1</li>
-                                <li>111 22 Stockholm</li>
+                                <li>Borås</li>
                                 <li><a href="mailto:info@lescent.se" className="hover:text-primary">info@lescent.se</a></li>
                             </ul>
                         </div>

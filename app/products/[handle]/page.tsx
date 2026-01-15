@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                         <div className="flex items-center gap-4">
                             <div className="h-[1px] w-8 bg-primary/20" />
                             <span className="text-muted-foreground text-sm tracking-[0.3em] uppercase font-medium">
-                                Signature Collection
+                                Inspirerad Utav
                             </span>
                         </div>
 
@@ -60,7 +60,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                             <p className="font-medium text-foreground">
                                 {formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}
                             </p>
-                            <span className="text-muted-foreground text-sm uppercase tracking-wide">100ml / 3.4 fl.oz</span>
+                            <span className="text-muted-foreground text-sm uppercase tracking-wide">10 ML</span>
                         </div>
 
 
@@ -76,28 +76,6 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                                     <AddToCart variantId={variant.id} availableForSale={variant.availableForSale} />
                                 )}
                             </Suspense>
-                        </div>
-                    </div>
-
-                    {/* Olfactory Experience (Doftprofil) */}
-                    <div className="space-y-8 border-t border-black/10 pt-16">
-                        <h2 className="font-serif text-3xl text-foreground">Doftprofil</h2>
-                        <div className="grid gap-12 sm:grid-cols-3">
-                            <div className="space-y-2">
-                                <span className="text-xs text-muted-foreground uppercase tracking-widest pl-1">Toppnoter</span>
-                                <div className="h-[1px] w-8 bg-primary/20 mb-3" />
-                                <p className="text-foreground/80 font-serif italic text-lg">Bergamott, Citrus, Saffran</p>
-                            </div>
-                            <div className="space-y-2">
-                                <span className="text-xs text-muted-foreground uppercase tracking-widest pl-1">Hjärtnoter</span>
-                                <div className="h-[1px] w-8 bg-primary/20 mb-3" />
-                                <p className="text-foreground/80 font-serif italic text-lg">Jasmin, Ros, Oud</p>
-                            </div>
-                            <div className="space-y-2">
-                                <span className="text-xs text-muted-foreground uppercase tracking-widest pl-1">Basnoter</span>
-                                <div className="h-[1px] w-8 bg-primary/20 mb-3" />
-                                <p className="text-foreground/80 font-serif italic text-lg">Amber, Mysk, Vanilj</p>
-                            </div>
                         </div>
                     </div>
 

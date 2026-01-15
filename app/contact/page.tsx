@@ -38,15 +38,7 @@ export default function ContactPage() {
                                 <h3 className="font-medium text-foreground">Adress</h3>
                                 <p className="text-muted-foreground">
                                     Lescent<br />
-                                    Storgatan 1<br />
-                                    111 22 Stockholm
-                                </p>
-                            </div>
-
-                            <div>
-                                <h3 className="font-medium text-foreground">Org.nr</h3>
-                                <p className="text-muted-foreground">
-                                    559000-0000
+                                    Borås
                                 </p>
                             </div>
                         </div>

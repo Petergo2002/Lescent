@@ -118,7 +118,7 @@ export function TimelineSection() {
                             icon={<Star className="w-6 h-6 text-gold-400" />}
                             title="Handplockade Ingredienser"
                             subtitle="Kvalitet"
-                            description="Varje droppe är resultatet av noggrant utvalda essenser från världens mest exklusiva hörn. Från Madagaskars vanilj till Grasse-rosor – vi kompromissar aldrig med råvarorna."
+                            description="Vi använder noggrant utvalda parfymoljor av högsta kvalitet för att skapa dofter som känns lyxiga och långvariga. Varje flaska fylls för hand med omsorg och precision."
                             imageSrc="/images/oil-perfume-ingredients.png"
                         />
                     </div>
