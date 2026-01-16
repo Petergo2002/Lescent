@@ -2,8 +2,11 @@
 import Image from 'next/image';
 
 export const metadata = {
-    title: 'Om Oss | Lescent',
-    description: 'Historien bakom Lescent och vår passion för oljebaserade parfymer.'
+    title: 'Om Oss',
+    description: 'Historien bakom Lescent och vår passion för oljebaserade parfymer. Utvalda ingredienser och handgjort hantverk.',
+    alternates: {
+        canonical: 'https://lescent.se/about',
+    },
 };
 
 export default function AboutPage() {

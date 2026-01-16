@@ -1,9 +1,62 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { getProduct } from 'lib/shopify';
 import { formatPrice } from 'lib/utils';
 import { AddToCart } from './add-to-cart';
 import { Suspense } from 'react';
+import { ProductSchema } from 'components/seo/JsonLd';
+
+type Props = {
+    params: Promise<{ handle: string }>;
+};
+
+/**
+ * Genererar dynamisk metadata för varje produktsida.
+ * Detta säkerställer att varje produkt har unik title, description och OpenGraph.
+ */
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { handle } = await params;
+
+    let product;
+    try {
+        product = await getProduct(handle);
+    } catch {
+        return {};
+    }
+
+    if (!product) return {};
+
+    const price = product.priceRange.minVariantPrice;
+    const description = product.description?.slice(0, 160) ||
+        `Köp ${product.title} - exklusiv oljebaserad parfym från Lescent. ${price.amount} ${price.currencyCode}`;
+
+    return {
+        title: product.title,
+        description: description,
+        openGraph: {
+            title: `${product.title} | Lescent`,
+            description: description,
+            images: product.featuredImage ? [{
+                url: product.featuredImage.url,
+                width: 1200,
+                height: 630,
+                alt: product.featuredImage.altText || product.title,
+            }] : [],
+            type: 'website',
+            locale: 'sv_SE',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: `${product.title} | Lescent`,
+            description: description,
+            images: product.featuredImage ? [product.featuredImage.url] : [],
+        },
+        alternates: {
+            canonical: `https://lescent.se/products/${handle}`,
+        },
+    };
+}
 
 export default async function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
     const { handle } = await params;
@@ -23,6 +76,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
 
     return (
         <div className="bg-background min-h-screen text-foreground pt-32 lg:pt-0">
+            <ProductSchema product={product} />
             {/* Desktop Split Layout */}
             <div className="lg:flex">
                 {/* Left: Sticky Image Gallery */}

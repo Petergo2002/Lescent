@@ -1,6 +1,19 @@
 
 import React from 'react';
 
+
+export const metadata = {
+    title: 'Köpvillkor',
+    description: 'Läs Lescents köpvillkor för beställningar, leverans, ångerrätt och reklamation. Trygg e-handel.',
+    robots: {
+        index: true,
+        follow: true,
+    },
+    alternates: {
+        canonical: 'https://lescent.se/kopvillkor',
+    },
+};
+
 export default function KopvillkorPage() {
     return (
         <div className="container mx-auto px-4 pt-40 pb-12 max-w-4xl">

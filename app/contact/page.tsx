@@ -4,6 +4,18 @@ import { Button } from "components/ui/button";
 import { Input } from "components/ui/input";
 import { Textarea } from "components/ui/textarea";
 
+export const metadata = {
+    title: 'Kontakta Oss',
+    description: 'Har du frågor om Lescents parfymer? Kontakta oss via e-post på info@lescent.se. Vi svarar inom 24 timmar.',
+    openGraph: {
+        title: 'Kontakta Lescent',
+        description: 'Har du frågor om våra oljebaserade parfymer? Vi finns här för dig.',
+    },
+    alternates: {
+        canonical: 'https://lescent.se/contact',
+    },
+};
+
 export default function ContactPage() {
     return (
         <div className="container mx-auto px-4 pt-40 pb-12">

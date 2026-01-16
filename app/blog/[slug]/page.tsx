@@ -1,8 +1,89 @@
 
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { Metadata } from 'next';
 
-export default function BlogPostPage({ params: _params }: { params: Promise<{ slug: string }> }) {
+// Artikel-data för SEO metadata
+const ARTICLES: Record<string, { title: string; description: string; image: string; category: string; readTime: string }> = {
+    'alkohol-vs-oljebaserad-parfym': {
+        title: 'Alkohol vs. Oljebaserad Parfym: Vad är skillnaden?',
+        description: 'Upptäck varför oljebaserade parfymer är det självklara valet. Lär dig skillnaden mellan alkoholbaserad och oljebaserad parfym.',
+        image: '/blog/oil-vs-alcohol.png',
+        category: 'Kunskap',
+        readTime: '4 min läsning',
+    },
+    'hur-applicerar-man-parfymolja': {
+        title: 'Ritualen: Hur du applicerar parfymolja korrekt',
+        description: 'Lär dig de strategiska pulspunkterna som maximerar din doftupplevelse med oljebaserad parfym.',
+        image: '/blog/applying-oil.png',
+        category: 'Guide',
+        readTime: '3 min läsning',
+    },
+    'topp-hjarta-basnoter-forklarat': {
+        title: 'Doftpyramiden Förklarad: Topp-, Hjärt- och Basnoter',
+        description: 'Förstå varför parfym doftar annorlunda efter en timme. En guide till doftpyramidens mysterium.',
+        image: '/blog/fragrance-pyramid.png',
+        category: 'Utbildning',
+        readTime: '6 min läsning',
+    },
+    'hitta-din-signaturdoft': {
+        title: 'Konsten att hitta din signaturdoft',
+        description: 'Din doft är ditt osynliga visitkort. Här är guiden till att hitta parfymen som speglar din personlighet.',
+        image: '/blog/collection.png',
+        category: 'Inspiration',
+        readTime: '5 min läsning',
+    },
+};
+
+type Props = {
+    params: Promise<{ slug: string }>;
+};
+
+/**
+ * Genererar dynamisk metadata för varje bloggartikel.
+ */
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
+    const article = ARTICLES[slug];
+
+    if (!article) {
+        return {
+            title: 'Artikel',
+            description: 'Läs mer på Lescent Journal',
+        };
+    }
+
+    return {
+        title: article.title,
+        description: article.description,
+        openGraph: {
+            title: `${article.title} | Lescent Journal`,
+            description: article.description,
+            type: 'article',
+            locale: 'sv_SE',
+            images: [{
+                url: article.image,
+                width: 1200,
+                height: 630,
+                alt: article.title,
+            }],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: article.title,
+            description: article.description,
+            images: [article.image],
+        },
+        alternates: {
+            canonical: `https://lescent.se/blog/${slug}`,
+        },
+    };
+}
+
+export default async function BlogPostPage({ params }: Props) {
+    const { slug } = await params;
+    const article = ARTICLES[slug];
+
     // In a real app, fetch article by slug here
     // For now, we just render a generic "Coming Soon" or placeholder template
 
@@ -21,12 +102,12 @@ export default function BlogPostPage({ params: _params }: { params: Promise<{ sl
 
                 <header className="space-y-8 mb-16 text-center">
                     <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground uppercase tracking-widest font-medium">
-                        <span>Guide</span>
+                        <span>{article?.category || 'Guide'}</span>
                         <span className="w-1 h-1 rounded-full bg-primary/20" />
-                        <span>5 min läsning</span>
+                        <span>{article?.readTime || '5 min läsning'}</span>
                     </div>
                     <h1 className="font-serif text-4xl md:text-6xl font-medium leading-tight text-foreground">
-                        Artikeln kommer snart
+                        {article?.title || 'Artikeln kommer snart'}
                     </h1>
                 </header>
 

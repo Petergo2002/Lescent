@@ -1,6 +1,19 @@
 
 import React from 'react';
 
+
+export const metadata = {
+    title: 'Integritetspolicy',
+    description: 'Lär dig hur Lescent hanterar dina personuppgifter i enlighet med GDPR. Din integritet är viktig för oss.',
+    robots: {
+        index: true,
+        follow: true,
+    },
+    alternates: {
+        canonical: 'https://lescent.se/integritetspolicy',
+    },
+};
+
 export default function IntegritetspolicyPage() {
     return (
         <div className="container mx-auto px-4 pt-40 pb-12 max-w-4xl">

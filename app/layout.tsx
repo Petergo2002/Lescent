@@ -8,8 +8,66 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
-    title: "Lescent | Exklusiva Oljebaserade Parfymer",
-    description: "Upptäck din signaturdoft med Lescents exklusiva kollektion av oljebaserade parfymer.",
+    metadataBase: new URL('https://lescent.se'),
+    title: {
+        default: 'Lescent | Exklusiva Oljebaserade Parfymer',
+        template: '%s | Lescent'
+    },
+    description: 'Upptäck din signaturdoft med Lescents exklusiva kollektion av handgjorda oljebaserade parfymer. Alkoholfria, långvariga dofter skapade i Sverige.',
+    keywords: [
+        'parfym', 'oljebaserad parfym', 'parfymolja', 'lescent',
+        'lyxparfym', 'svensk parfym', 'alkoholfri parfym',
+        'handgjord parfym', 'doft', 'exklusiv parfym'
+    ],
+    authors: [{ name: 'Lescent', url: 'https://lescent.se' }],
+    creator: 'Lescent',
+    publisher: 'Lescent',
+    formatDetection: {
+        email: false,
+        address: false,
+        telephone: false,
+    },
+    openGraph: {
+        type: 'website',
+        locale: 'sv_SE',
+        url: 'https://lescent.se',
+        siteName: 'Lescent',
+        title: 'Lescent | Exklusiva Oljebaserade Parfymer',
+        description: 'Upptäck din signaturdoft med Lescents handgjorda oljebaserade parfymer.',
+        images: [
+            {
+                url: '/og-image.jpg',
+                width: 1200,
+                height: 630,
+                alt: 'Lescent - Exklusiva Oljebaserade Parfymer',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Lescent | Exklusiva Oljebaserade Parfymer',
+        description: 'Upptäck din signaturdoft med Lescents handgjorda oljebaserade parfymer.',
+        images: ['/og-image.jpg'],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
+    alternates: {
+        canonical: 'https://lescent.se',
+        languages: {
+            'sv-SE': 'https://lescent.se',
+        },
+    },
+    // Icons handled automatically by app/icon.png
+    manifest: '/manifest.json',
 };
 
 import { getCart } from 'lib/shopify';
