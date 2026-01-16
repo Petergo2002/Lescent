@@ -7,12 +7,12 @@ import Image from 'next/image';
 
 export function Hero() {
     return (
-        <section className="relative w-full h-screen overflow-hidden bg-eggshell md:bg-evergreen pt-28 px-4 pb-4 md:p-0">
+        <section className="relative w-full h-screen overflow-hidden bg-eggshell pt-28 px-4 pb-4 md:pt-32 md:px-8 md:pb-8">
             {/* 
               Desktop Layout: Split Screen (Left Content, Right Image)
               Mobile Layout: Full Screen Image Background with Overlay
             */}
-            <div className="flex h-full w-full flex-col md:flex-row rounded-[2.5rem] md:rounded-none overflow-hidden shadow-2xl md:shadow-none ring-1 ring-white/10 md:ring-0 relative">
+            <div className="flex h-full w-full flex-col md:flex-row rounded-[2.5rem] overflow-hidden shadow-2xl ring-1 ring-white/10 relative">
 
                 {/* 
                   LEFT SIDE (Desktop) / OVERLAY CONTENT (Mobile)
@@ -35,13 +35,13 @@ export function Hero() {
                             </span>
 
                             {/* Main Title - Adjusted for Mobile */}
-                            <h1 className="font-sans font-black tracking-tighter text-4xl leading-[1.1] text-white sm:text-6xl md:text-7xl lg:text-[5.5rem] drop-shadow-lg md:drop-shadow-none md:mb-8 md:font-serif md:font-bold md:tracking-normal md:leading-[0.95]">
+                            <h1 className="font-sans font-black tracking-tighter text-4xl leading-[1.1] text-white sm:text-6xl md:text-7xl lg:text-[5.5rem] drop-shadow-lg md:drop-shadow-none md:mb-8">
                                 Upptäck doften av <br className="hidden md:block" />
-                                <span className="relative inline-block mt-1 text-white md:text-gold-400 md:font-serif md:italic md:font-bold md:tracking-normal md:inline md:mt-0">
+                                <span className="relative inline-block mt-1 text-white md:text-gold-400 md:inline md:mt-0">
                                     ren elegans
-                                    {/* Custom Handwritten "Swoosh" Underline - Visible only on Mobile */}
+                                    {/* Custom Handwritten "Swoosh" Underline */}
                                     <svg
-                                        className="absolute -bottom-4 -left-[5%] w-[110%] h-auto text-white md:hidden"
+                                        className="absolute -bottom-4 -left-[5%] w-[110%] h-auto text-white md:text-gold-400"
                                         viewBox="0 0 200 20"
                                         preserveAspectRatio="none"
                                         fill="none"
@@ -93,7 +93,8 @@ export function Hero() {
                         fill
                         className="object-cover object-center"
                         priority
-                        unoptimized
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        quality={90}
                     />
                     {/* Mobile Gradient Overlay - Stronger at bottom for text readability */}
                     <div className="absolute inset-0 bg-gradient-to-b from-evergreen/40 via-transparent to-evergreen/80 md:hidden" />

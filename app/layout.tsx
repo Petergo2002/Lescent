@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "components/layout/navbar";
+import { SmoothScroll } from "components/SmoothScroll";
 import { cn } from "lib/utils";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -85,7 +86,8 @@ export default async function RootLayout({
 
     return (
         <html lang="sv">
-            <body className={cn(inter.variable, playfair.variable, "min-h-screen bg-background font-sans antialiased")} suppressHydrationWarning={true}>
+            <body className={cn(inter.variable, playfair.variable, "min-h-screen bg-background font-sans antialiased relative")} suppressHydrationWarning={true}>
+                <SmoothScroll />
                 <Navbar cart={cart} />
                 <main className="flex-1">
                     {children}

@@ -53,7 +53,7 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
                         height={93}
                         className={cn(
                             "object-contain h-24 w-auto transition-all",
-                            isHome && !isScrolled ? "invert md:invert-0" : "invert-0" // Invert on mobile home (light bg), normal on desktop/scrolled
+                            isHome && !isScrolled ? "invert" : "invert-0" // Invert on home (light bg) for both mobile and desktop
                         )}
                         priority
                         unoptimized
@@ -68,7 +68,7 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
                             href={link.href}
                             className={cn(
                                 "group relative text-sm font-medium transition-colors hover:text-eggshell",
-                                isScrolled || !isHome ? "text-white" : "text-evergreen md:text-white"
+                                isScrolled || !isHome ? "text-white" : "text-evergreen"
                             )}
                         >
                             {link.label}
@@ -120,7 +120,8 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
 
                 {/* Desktop Actions */}
                 <div className={cn(
-                    "hidden md:flex items-center gap-6 transition-colors text-white"
+                    "hidden md:flex items-center gap-6 transition-colors",
+                    isScrolled || !isHome ? "text-white" : "text-evergreen"
                 )}>
                     <button className="hover:text-eggshell">
                         <Search className="h-5 w-5" />
