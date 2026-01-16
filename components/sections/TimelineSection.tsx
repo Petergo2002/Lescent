@@ -23,7 +23,7 @@ export function TimelineSection() {
     return (
         <section ref={containerRef} className="py-24 md:py-40 relative overflow-hidden bg-[#050505] text-white">
             {/* Ambient Background - "Scent Mist" */}
-            <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 pointer-events-none hidden">
                 <motion.div
                     animate={{
                         opacity: [0.3, 0.5, 0.3],

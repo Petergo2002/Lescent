@@ -88,7 +88,7 @@ export function Hero() {
                 */}
                 <div className="absolute inset-0 z-0 h-full w-full md:relative md:w-1/2 md:inset-auto">
                     <Image
-                        src="/realhero.png"
+                        src="/realhero_compreesd.png"
                         alt="Lescent Premium Oil Perfume"
                         fill
                         className="object-cover object-center"
