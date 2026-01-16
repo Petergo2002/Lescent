@@ -51,7 +51,10 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
                         alt="LESCENT"
                         width={280}
                         height={93}
-                        className="object-contain h-24 w-auto"
+                        className={cn(
+                            "object-contain h-24 w-auto transition-all",
+                            isHome && !isScrolled ? "invert md:invert-0" : "invert-0" // Invert on mobile home (light bg), normal on desktop/scrolled
+                        )}
                         priority
                         unoptimized
                     />
@@ -65,7 +68,7 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
                             href={link.href}
                             className={cn(
                                 "group relative text-sm font-medium transition-colors hover:text-eggshell",
-                                "text-white"
+                                isScrolled || !isHome ? "text-white" : "text-evergreen md:text-white"
                             )}
                         >
                             {link.label}
@@ -83,17 +86,17 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
 
                 {/* Mobile Menu */}
                 <div className="flex md:hidden items-center gap-4">
-                    <button className={cn("hover:text-eggshell transition-colors text-white")}>
+                    <button className={cn("hover:text-eggshell transition-colors", isScrolled || !isHome ? "text-white" : "text-evergreen")}>
                         <Search className="h-5 w-5" />
                     </button>
                     {/* Pass custom color class to CartSheet if needed, otherwise it handles itself. Assuming CartSheet icon is styleable or consistent. */}
-                    <div className="text-white">
+                    <div className={cn(isScrolled || !isHome ? "text-white" : "text-evergreen")}>
                         <CartSheet cart={cart} />
                     </div>
 
                     <Sheet>
                         <SheetTrigger asChild>
-                            <button className={cn("p-2 transition-colors text-white hover:text-eggshell")} suppressHydrationWarning>
+                            <button className={cn("p-2 transition-colors hover:text-eggshell", isScrolled || !isHome ? "text-white" : "text-evergreen")} suppressHydrationWarning>
                                 <Menu className="h-6 w-6" />
                             </button>
                         </SheetTrigger>

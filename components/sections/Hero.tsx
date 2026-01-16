@@ -7,12 +7,12 @@ import Image from 'next/image';
 
 export function Hero() {
     return (
-        <section className="relative w-full h-screen overflow-hidden bg-evergreen">
+        <section className="relative w-full h-screen overflow-hidden bg-eggshell md:bg-evergreen pt-28 px-4 pb-4 md:p-0">
             {/* 
               Desktop Layout: Split Screen (Left Content, Right Image)
               Mobile Layout: Full Screen Image Background with Overlay
             */}
-            <div className="flex h-full w-full flex-col md:flex-row">
+            <div className="flex h-full w-full flex-col md:flex-row rounded-[2.5rem] md:rounded-none overflow-hidden shadow-2xl md:shadow-none ring-1 ring-white/10 md:ring-0 relative">
 
                 {/* 
                   LEFT SIDE (Desktop) / OVERLAY CONTENT (Mobile)
@@ -25,34 +25,59 @@ export function Hero() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="max-w-2xl"
+                        className="max-w-2xl flex flex-col items-center justify-between h-full py-12 md:py-0 md:h-auto md:justify-start md:items-start"
                     >
-                        {/* Tagline */}
-                        <span className="mb-6 block text-sm font-extrabold tracking-[0.3em] text-gold-400 uppercase">
-                            Premium Collection
-                        </span>
+                        {/* Mobile Top Content: Tagline + Title */}
+                        <div className="flex flex-col items-center md:items-start w-full mt-12 md:mt-0">
+                            {/* Tagline - Hidden on Mobile */}
+                            <span className="hidden md:block mb-6 text-sm font-extrabold tracking-[0.3em] text-gold-400 uppercase">
+                                Premium Collection
+                            </span>
 
-                        {/* Main Title - BOLDER and BIGGER */}
-                        <h1 className="mb-8 font-serif text-5xl font-bold leading-[0.95] text-white sm:text-6xl md:text-7xl lg:text-[5.5rem] drop-shadow-lg md:drop-shadow-none">
-                            Upptäck doften av <br className="hidden md:block" />
-                            <span className="italic text-gold-400 font-serif">ren elegans</span>
-                        </h1>
+                            {/* Main Title - Adjusted for Mobile */}
+                            <h1 className="font-sans font-black tracking-tighter text-4xl leading-[1.1] text-white sm:text-6xl md:text-7xl lg:text-[5.5rem] drop-shadow-lg md:drop-shadow-none md:mb-8 md:font-serif md:font-bold md:tracking-normal md:leading-[0.95]">
+                                Upptäck doften av <br className="hidden md:block" />
+                                <span className="relative inline-block mt-1 text-white md:text-gold-400 md:font-serif md:italic md:font-bold md:tracking-normal md:inline md:mt-0">
+                                    ren elegans
+                                    {/* Custom Handwritten "Swoosh" Underline - Visible only on Mobile */}
+                                    <svg
+                                        className="absolute -bottom-4 -left-[5%] w-[110%] h-auto text-white md:hidden"
+                                        viewBox="0 0 200 20"
+                                        preserveAspectRatio="none"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M0 12 C 50 22 130 22 200 5"
+                                            stroke="currentColor"
+                                            strokeWidth="3"
+                                            strokeLinecap="round"
+                                            className="opacity-90"
+                                        />
+                                    </svg>
+                                </span>
+                            </h1>
+                        </div>
 
-                        {/* Description */}
-                        <p className="mb-12 text-base font-light leading-relaxed tracking-wide text-gray-200 md:text-lg lg:text-xl max-w-lg drop-shadow-md md:drop-shadow-none">
-                            Exklusiva oljebaserade parfymer skapade för att lämna ett bestående intryck. Upplev en värld av sofistikerade dofter som definierar din personlighet.
-                        </p>
+                        {/* Mobile Bottom Content: Description + Button */}
+                        <div className="flex flex-col items-center md:items-start w-full mb-8 md:mb-0">
+                            {/* Description - Visible on Mobile now, but simplified */}
+                            <p className="mb-8 text-sm md:text-base font-medium md:font-light leading-relaxed tracking-wide text-gray-100/90 md:text-gray-200 md:text-lg lg:text-xl max-w-[280px] md:max-w-lg drop-shadow-md md:drop-shadow-none text-center md:text-left">
+                                Exklusiva oljebaserade parfymer skapade för att lämna ett bestående intryck.
+                                <span className="hidden md:inline"> Upplev en värld av sofistikerade dofter som definierar din personlighet.</span>
+                            </p>
 
-                        {/* CTA Button */}
-                        <Button
-                            size="lg"
-                            className="group relative h-16 w-full md:w-auto overflow-hidden rounded-none border-2 border-gold-400 bg-transparent px-14 text-base font-bold tracking-[0.2em] text-white transition-all hover:bg-gold-400 hover:text-black shadow-[0_0_20px_rgba(0,0,0,0.5)] md:shadow-none"
-                            asChild
-                        >
-                            <Link href="/products">
-                                <span className="relative z-10">UPPTÄCK NU</span>
-                            </Link>
-                        </Button>
+                            {/* CTA Button */}
+                            <Button
+                                size="lg"
+                                className="group relative h-14 md:h-16 w-auto min-w-[200px] md:w-auto overflow-hidden rounded-full md:rounded-none border-0 md:border-2 border-gold-400 bg-white/10 backdrop-blur-md md:backdrop-blur-none md:bg-transparent px-10 md:px-14 text-sm md:text-base font-bold tracking-[0.2em] text-white transition-all hover:bg-gold-400 hover:text-black shadow-[0_0_20px_rgba(0,0,0,0.5)] md:shadow-none"
+                                asChild
+                            >
+                                <Link href="/products">
+                                    <span className="relative z-10">UPPTÄCK NU</span>
+                                </Link>
+                            </Button>
+                        </div>
                     </motion.div>
                 </div>
 
@@ -70,8 +95,8 @@ export function Hero() {
                         priority
                         unoptimized
                     />
-                    {/* Mobile Gradient Overlay - Only visible on Mobile */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-evergreen/90 via-evergreen/50 to-evergreen/30 md:hidden" />
+                    {/* Mobile Gradient Overlay - Stronger at bottom for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-evergreen/40 via-transparent to-evergreen/80 md:hidden" />
 
                     {/* Desktop Gradient Overlay - Subtle vignette for better transition */}
                     <div className="hidden absolute inset-0 bg-gradient-to-r from-evergreen via-transparent to-transparent md:block opacity-50" />
