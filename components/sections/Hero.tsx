@@ -69,7 +69,6 @@ export function Hero() {
                         className="object-cover object-center"
                         priority
                         unoptimized
-                        quality={100}
                     />
                     {/* Mobile Gradient Overlay - Only visible on Mobile */}
                     <div className="absolute inset-0 bg-gradient-to-t from-evergreen/90 via-evergreen/50 to-evergreen/30 md:hidden" />
