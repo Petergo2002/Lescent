@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowRight, Star, Droplets } from 'lucide-react';
 import { Button } from 'components/ui/button';
 import { motion, useScroll, useSpring } from 'framer-motion';
@@ -131,13 +132,15 @@ export function TimelineSection() {
                     viewport={{ once: true }}
                     className="flex justify-center mt-24 md:mt-32"
                 >
-                    <Button
-                        size="lg"
-                        className="h-16 px-10 rounded-full bg-white text-black hover:bg-gold-400 hover:text-white transition-all duration-300 text-lg font-medium shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_-10px_rgba(255,215,0,0.5)] group"
-                    >
-                        <span>Upptäck Hela Historien</span>
-                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    <Link href="/about">
+                        <Button
+                            size="lg"
+                            className="h-16 px-10 rounded-full bg-white text-black hover:bg-gold-400 hover:text-white transition-all duration-300 text-lg font-medium shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_-10px_rgba(255,215,0,0.5)] group"
+                        >
+                            <span>Upptäck Hela Historien</span>
+                            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                    </Link>
                 </motion.div>
             </div>
         </section>

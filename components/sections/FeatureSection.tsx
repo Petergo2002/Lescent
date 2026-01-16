@@ -2,6 +2,7 @@
 
 import { ArrowRight } from 'lucide-react';
 import { Button } from 'components/ui/button';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export function FeatureSection() {
@@ -28,9 +29,11 @@ export function FeatureSection() {
                         <p className="max-w-md text-muted-foreground md:text-right">
                             Välkommen till Lescent – handgjorda oljeparfymer från Sverige. Upptäck vår exklusiva kollektion.
                         </p>
-                        <Button size="lg" className="group gap-2 rounded-full h-12 px-8">
-                            Utforska Mer
-                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        <Button size="lg" className="group gap-2 rounded-full h-12 px-8" asChild>
+                            <Link href="/products">
+                                Utforska Mer
+                                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                            </Link>
                         </Button>
                     </motion.div>
                 </div>

@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getProducts } from 'lib/shopify';
+import { BLOG_POSTS } from '@/lib/blog';
 
 /**
  * Dynamisk sitemap som automatiskt inkluderar alla sidor och produkter.
@@ -70,19 +71,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     }));
 
-    // Blogginlägg (statiska slugs)
-    const blogSlugs = [
-        'alkohol-vs-oljebaserad-parfym',
-        'hur-applicerar-man-parfymolja',
-        'topp-hjarta-basnoter-forklarat',
-        'hitta-din-signaturdoft',
-    ];
-    const blogPages: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
-        url: `${baseUrl}/blog/${slug}`,
-        lastModified: new Date(),
+
+    // Blogginlägg (från lib/blog.ts)
+    const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: new Date(post.date), // Use article specific date
         changeFrequency: 'monthly' as const,
-        priority: 0.6,
+        priority: 0.7,
     }));
+
 
     return [...staticPages, ...productPages, ...blogPages];
 }

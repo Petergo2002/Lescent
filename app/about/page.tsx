@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export const metadata = {
     title: 'Om Oss',
-    description: 'Historien bakom Lescent och vår passion för oljebaserade parfymer. Utvalda ingredienser och handgjort hantverk.',
+    description: 'Historien bakom Lescent i Borås. Vi brinner för att skapa högkvalitativa, långvariga oljeparfymer inspirerade av världens bästa dofter.',
     alternates: {
         canonical: 'https://lescent.se/about',
     },
@@ -22,14 +22,14 @@ export default function AboutPage() {
                 {/* Hero Section */}
                 <div className="container pt-44 pb-24 md:pt-52 md:pb-32 text-center space-y-8">
                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-                        <span className="text-muted-foreground text-sm tracking-[0.4em] uppercase font-medium">Vår Historia</span>
+                        <span className="text-muted-foreground text-sm tracking-[0.4em] uppercase font-medium">Vår Berättelse</span>
                     </div>
                     <h1 className="font-serif text-5xl md:text-7xl font-medium tracking-tight animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100 text-foreground">
-                        Konsten att skapa <br /><span className="italic text-muted-foreground">tidlöshet</span>
+                        Från Borås med <br /><span className="italic text-muted-foreground">passion</span>
                     </h1>
                     <p className="max-w-2xl mx-auto text-lg text-muted-foreground font-light leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
-                        Lescent föddes ur en enkel önskan: Att skapa dofter som inte bara doftar, utan som känns.
-                        En motreaktion mot det flyktiga, och en hyllning till det bestående.
+                        Vi är ett företag baserat i Borås som drivs av en brinnande passion för parfymer.
+                        Vårt mål är att leverera doftupplevelser som både berör och består.
                     </p>
                 </div>
 
@@ -37,15 +37,13 @@ export default function AboutPage() {
                 <section className="bg-secondary/5 border-y border-black/5">
                     <div className="container py-24 md:py-32 grid lg:grid-cols-2 gap-16 items-center">
                         <div className="space-y-8 order-2 lg:order-1">
-                            <h2 className="font-serif text-4xl md:text-5xl text-foreground">Visionen</h2>
+                            <h2 className="font-serif text-4xl md:text-5xl text-foreground">Inspirerad av de bästa</h2>
                             <div className="space-y-6 text-muted-foreground font-light leading-relaxed text-lg">
                                 <p>
-                                    I en värld fylld av massproduktion och utspädda essenser, valde vi en annan väg.
-                                    Vi ville gå tillbaka till parfymkonstens rötter – där oljan var bäraren av själen.
+                                    Vår affärsidé är enkel men kraftfull: Att erbjuda högkvalitativa oljeparfymer som är inspirerade av marknadens mest exklusiva och topprankade dofter. Vi kallar dem "dupes" av högsta klass.
                                 </p>
                                 <p>
-                                    Vår vision är att erbjuda en doftupplevelse som är intim, personlig och framför allt, varaktig.
-                                    Vi tror att din doft är din osynliga signatur, och den förtjänar att skrivas med bläck som inte bleknar.
+                                    Vi ville skapa något som håller måttet. Genom att fokusera på oljebaserade extrakt säkerställer vi att doften sitter kvar på huden betydligt längre än traditionella alkoholbaserade parfymer. Det är lyx som varar.
                                 </p>
                             </div>
                         </div>
@@ -72,12 +70,10 @@ export default function AboutPage() {
                             />
                         </div>
                         <div className="space-y-8">
-                            <span className="text-primary text-sm tracking-[0.4em] uppercase font-medium">Hantverket</span>
-                            <h2 className="font-serif text-4xl md:text-5xl text-foreground">Varje droppe räknas</h2>
+                            <span className="text-primary text-sm tracking-[0.4em] uppercase font-medium">Vårt Löfte</span>
+                            <h2 className="font-serif text-4xl md:text-5xl text-foreground">Kvalitet i varje droppe</h2>
                             <p className="text-muted-foreground font-light leading-relaxed text-lg">
-                                Våra parfymer blandas för hand med de finaste ingredienserna från världens alla hörn.
-                                Från den djupa Ouden i öst till den friska Bergamotten i väst.
-                                Ingen alkohol, inga onödiga tillsatser. Bara ren, outspädd perfektion.
+                                Vi brinner för att leverera det bästa. Våra oljeparfymer är noggrant framtagna för att matcha orginalens notprofiler, men med oljans överlägsna hållbarhet. Det är din favoritdoft, men intensivare och mer långvarig.
                             </p>
                         </div>
                     </div>
@@ -93,8 +89,8 @@ export default function AboutPage() {
                     />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                         <div className="text-center text-white space-y-6 max-w-2xl px-6">
-                            <h2 className="font-serif text-4xl md:text-6xl">Naturens finaste essenser</h2>
-                            <p className="text-lg font-light text-white/80">Utvalda med omsorg. Blandade med precision.</p>
+                            <h2 className="font-serif text-4xl md:text-6xl">Dofter som består</h2>
+                            <p className="text-lg font-light text-white/80">Oljebaserad lyx från oss till dig.</p>
                         </div>
                     </div>
                 </section>

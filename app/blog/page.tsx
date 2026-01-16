@@ -8,48 +8,7 @@ export const metadata = {
     description: 'Utforska våra guider och artiklar om oljebaserad parfym, doftnoter och hur du hittar din signaturdoft.'
 };
 
-const ARTICLES = [
-    {
-        id: 1,
-        slug: 'alkohol-vs-oljebaserad-parfym',
-        title: 'Alkohol vs. Oljebaserad Parfym: Vad är skillnaden?',
-        excerpt: 'De flesta kommersiella parfymer består av upp till 90% alkohol. Upptäck varför oljebaserade parfymer är det självklara valet för den medvetna konsumenten.',
-        date: '5 Dec, 2025',
-        readTime: '4 min läsning',
-        category: 'Kunskap',
-        image: '/blog/oil-vs-alcohol.png'
-    },
-    {
-        id: 2,
-        slug: 'hur-applicerar-man-parfymolja',
-        title: 'Ritualen: Hur du applicerar parfymolja korrekt',
-        excerpt: 'Att applicera parfymolja är mer än bara en rutin - det är en ritual. Lär dig de strategiska pulspunkterna som maximerar din doftupplevelse.',
-        date: '28 Nov, 2025',
-        readTime: '3 min läsning',
-        category: 'Guide',
-        image: '/blog/applying-oil.png'
-    },
-    {
-        id: 3,
-        slug: 'topp-hjarta-basnoter-forklarat',
-        title: 'Doftpyramiden Förklarad: Förstå din parfym',
-        excerpt: 'Varför doftar din parfym annorlunda efter en timme? Vi dyker ner i doftpyramidens mysterium och förklarar topp-, hjärt- och basnoter.',
-        date: '15 Nov, 2025',
-        readTime: '6 min läsning',
-        category: 'Utbildning',
-        image: '/blog/fragrance-pyramid.png'
-    },
-    {
-        id: 4,
-        slug: 'hitta-din-signaturdoft',
-        title: 'Konsten att hitta din signaturdoft',
-        excerpt: 'Din doft är ditt osynliga visitkort. Här är guiden till att hitta parfymen som speglar din personlighet och stil.',
-        date: '1 Nov, 2025',
-        readTime: '5 min läsning',
-        category: 'Inspiration',
-        image: '/blog/collection.png'
-    }
-];
+import { BLOG_POSTS as ARTICLES } from '@/lib/blog';
 
 export default function BlogPage() {
     return (
