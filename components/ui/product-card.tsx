@@ -5,24 +5,18 @@ import Image from 'next/image';
 import { Heart, ArrowRight } from 'lucide-react';
 import { Product } from 'lib/shopify/types';
 import { formatPrice } from 'lib/utils';
-import { motion } from 'framer-motion';
 
 export function ProductCard({ product }: { product: Product }) {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="group relative overflow-hidden rounded-2xl bg-white p-3 transition-all duration-300 hover:shadow-xl border border-evergreen/10"
-        >
+        <div className="group relative overflow-hidden rounded-2xl border border-evergreen/10 bg-white p-3 transition-shadow duration-300 hover:shadow-xl">
             {/* Badges */}
             <div className="absolute left-4 top-4 z-10">
-                <span className="rounded-full bg-evergreen/10 px-3 py-1 text-xs font-medium tracking-wide text-evergreen backdrop-blur-md border border-evergreen/10">
+                <span className="rounded-full border border-evergreen/10 bg-white/95 px-3 py-1 text-xs font-medium tracking-wide text-evergreen">
                     NYHET
                 </span>
             </div>
 
-            <button className="absolute right-4 top-4 z-10 rounded-full bg-white/80 p-2 text-black backdrop-blur-md transition-all hover:bg-imperial-blue hover:text-white hover:scale-105">
+            <button className="absolute right-4 top-4 z-10 rounded-full bg-white/95 p-2 text-black transition-colors duration-200 hover:bg-imperial-blue hover:text-white">
                 <Heart className="h-4 w-4" />
             </button>
 
@@ -58,12 +52,12 @@ export function ProductCard({ product }: { product: Product }) {
                     </div>
 
                     <Link href={`/products/${product.handle}`}>
-                        <button className="flex h-10 w-10 items-center justify-center rounded-full border border-evergreen/10 bg-evergreen text-white transition-all hover:bg-imperial-blue hover:scale-105">
+                        <button className="flex h-10 w-10 items-center justify-center rounded-full border border-evergreen/10 bg-evergreen text-white transition-colors duration-200 hover:bg-imperial-blue">
                             <ArrowRight className="h-4 w-4" />
                         </button>
                     </Link>
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 }

@@ -1,6 +1,7 @@
 import { getProducts } from 'lib/shopify';
 import { ProductCard } from 'components/ui/product-card';
 import { RefreshButton } from 'components/admin/refresh-button';
+import { PageAmbience } from 'components/ui/page-ambience';
 
 export const metadata = {
     title: 'Kollektionen | Lescent',
@@ -11,14 +12,10 @@ export default async function ProductsPage() {
     const products = await getProducts({ sortKey: 'CREATED_AT', reverse: true });
 
     return (
-        <div className="min-h-screen pt-44 md:pt-52 pb-24">
-            {/* Background Ambience */}
-            <div className="fixed inset-0 pointer-events-none z-0">
-                <div className="absolute left-[-10%] top-[-10%] h-[800px] w-[800px] rounded-full bg-primary/5 blur-[150px]" />
-                <div className="absolute right-[-10%] bottom-[-10%] h-[800px] w-[800px] rounded-full bg-gold-400/5 blur-[150px]" />
-            </div>
+        <div className="relative isolate min-h-screen pt-44 pb-24 md:pt-52">
+            <PageAmbience />
 
-            <div className="container relative z-10">
+            <div className="container">
                 {/* Header */}
                 <div className="mb-24 text-center space-y-8 max-w-4xl mx-auto">
                     <div className="flex items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">

@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
+import { PageAmbience } from 'components/ui/page-ambience';
 
 export const metadata = {
     title: 'Lescent Journal | Kunskap om Parfym',
@@ -12,14 +13,10 @@ import { BLOG_POSTS as ARTICLES } from '@/lib/blog';
 
 export default function BlogPage() {
     return (
-        <div className="min-h-screen pt-44 md:pt-52 pb-24">
-            {/* Background Ambience */}
-            <div className="fixed inset-0 pointer-events-none z-0">
-                <div className="absolute left-[-20%] top-[-10%] h-[1000px] w-[1000px] bg-primary/5 blur-[150px] rounded-full" />
-                <div className="absolute right-[-20%] bottom-[-10%] h-[800px] w-[800px] bg-gold-400/5 blur-[150px] rounded-full" />
-            </div>
+        <div className="relative isolate min-h-screen pt-44 pb-24 md:pt-52">
+            <PageAmbience />
 
-            <div className="container relative z-10 px-6">
+            <div className="container px-6">
                 {/* Header */}
                 <div className="mb-24 space-y-6 max-w-2xl animate-in fade-in slide-in-from-bottom-4 duration-700">
                     <span className="text-muted-foreground text-sm tracking-[0.3em] uppercase font-medium">Lescent Journal</span>
@@ -50,7 +47,7 @@ export default function BlogPage() {
                                 />
                                 <div className="absolute inset-0 bg-black/10 transition-opacity group-hover:bg-black/0" />
                                 <div className="absolute top-4 left-4">
-                                    <span className="bg-white/90 backdrop-blur-sm text-primary px-3 py-1 text-xs font-medium uppercase tracking-wider rounded-full">
+                                    <span className="bg-white/95 text-primary px-3 py-1 text-xs font-medium uppercase tracking-wider rounded-full">
                                         {article.category}
                                     </span>
                                 </div>
@@ -68,7 +65,7 @@ export default function BlogPage() {
                                 <p className="text-muted-foreground font-light leading-relaxed">
                                     {article.excerpt}
                                 </p>
-                                <div className="flex items-center gap-2 text-sm text-foreground font-medium group-hover:gap-4 transition-all group-hover:text-primary">
+                                <div className="flex items-center gap-2 text-sm text-foreground font-medium transition-colors group-hover:text-primary">
                                     Läs artikeln <ArrowRight className="w-4 h-4" />
                                 </div>
                             </div>

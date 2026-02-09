@@ -24,11 +24,27 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
     const [isScrolled, setIsScrolled] = React.useState(false);
 
     React.useEffect(() => {
+        let frame = 0;
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
+            if (frame) {
+                return;
+            }
+
+            frame = window.requestAnimationFrame(() => {
+                frame = 0;
+                const nextScrolled = window.scrollY > 20;
+                setIsScrolled((prev) => (prev === nextScrolled ? prev : nextScrolled));
+            });
         };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (frame) {
+                window.cancelAnimationFrame(frame);
+            }
+        };
     }, []);
 
     // Helper to determine if we are on the home page (transparent) or not

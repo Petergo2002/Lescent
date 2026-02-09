@@ -159,5 +159,5 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 }
 
 export function getAllBlogColumns() {
-    return BLOG_POSTS.map(({ content, ...meta }) => meta); // Return helper without heavy content if needed lists
+    return BLOG_POSTS.map(({ content: _content, ...meta }) => meta); // Return helper without heavy content if needed lists
 }

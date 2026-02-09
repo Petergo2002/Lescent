@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Metadata } from 'next';
 import { getBlogPost } from '@/lib/blog';
 import Image from 'next/image';
+import { PageAmbience } from 'components/ui/page-ambience';
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -101,19 +102,15 @@ export default async function BlogPostPage({ params }: Props) {
     };
 
     return (
-        <div className="min-h-screen pt-44 md:pt-52 pb-24">
+        <div className="relative isolate min-h-screen pt-44 pb-24 md:pt-52">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
 
-            {/* Background Ambience */}
-            <div className="fixed inset-0 pointer-events-none z-0">
-                <div className="absolute right-0 top-1/4 h-[800px] w-[800px] bg-primary/5 blur-[150px] rounded-full" />
-                <div className="absolute left-0 bottom-0 h-[600px] w-[600px] bg-gold-400/5 blur-[100px] rounded-full" />
-            </div>
+            <PageAmbience />
 
-            <article className="container relative z-10 max-w-3xl px-6 mx-auto">
+            <article className="container max-w-3xl px-6 mx-auto">
                 <Link href="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm uppercase tracking-widest group">
                     <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Tillbaka till Journalen
                 </Link>
