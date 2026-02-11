@@ -6,7 +6,7 @@ import { Textarea } from "components/ui/textarea";
 
 export const metadata = {
     title: 'Kontakta Oss',
-    description: 'Har du frågor om Lescents parfymer? Kontakta oss via e-post på info@lescent.se. Vi svarar inom 24 timmar.',
+    description: 'Har du frågor om Lescents parfymer? Kontakta oss via e-post på lescentsweden@hotmail.com. Vi svarar inom 24 timmar.',
     openGraph: {
         title: 'Kontakta Lescent',
         description: 'Har du frågor om våra oljebaserade parfymer? Vi finns här för dig.',
@@ -41,8 +41,8 @@ export default function ContactPage() {
                         <div className="space-y-4">
                             <div>
                                 <h3 className="font-medium text-foreground">E-post</h3>
-                                <a href="mailto:info@lescent.se" className="text-muted-foreground hover:text-primary transition-colors">
-                                    info@lescent.se
+                                <a href="mailto:lescentsweden@hotmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+                                    lescentsweden@hotmail.com
                                 </a>
                             </div>
 

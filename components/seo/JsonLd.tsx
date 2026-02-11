@@ -15,7 +15,7 @@ export function OrganizationSchema() {
         },
         contactPoint: {
             '@type': 'ContactPoint',
-            email: 'info@lescent.se',
+            email: 'lescentsweden@hotmail.com',
             contactType: 'customer service',
         },
         sameAs: [

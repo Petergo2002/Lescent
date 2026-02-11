@@ -114,7 +114,7 @@ export default async function RootLayout({
                             <ul className="space-y-2 text-sm text-muted-foreground">
                                 <li><strong>Lescent</strong></li>
                                 <li>Borås</li>
-                                <li><a href="mailto:info@lescent.se" className="hover:text-primary">info@lescent.se</a></li>
+                                <li><a href="mailto:lescentsweden@hotmail.com" className="hover:text-primary">lescentsweden@hotmail.com</a></li>
                             </ul>
                         </div>
                         <div>
