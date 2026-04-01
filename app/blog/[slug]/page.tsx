@@ -1,62 +1,33 @@
-
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { Metadata } from 'next';
-import { getBlogPost } from '@/lib/blog';
-import Image from 'next/image';
+import { SchemaMarkup } from 'components/SchemaMarkup';
 import { PageAmbience } from 'components/ui/page-ambience';
+import { getBlogPost } from '@/lib/blog';
+import { buildArticleSchema, buildBreadcrumbSchema, generateMetadata as generateSeoMetadata, SITE_URL } from 'lib/seo';
 
 type Props = {
     params: Promise<{ slug: string }>;
 };
 
-/**
- * Genererar dynamisk metadata för varje bloggartikel.
- */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const article = getBlogPost(slug);
 
     if (!article) {
         return {
-            title: 'Artikel ej hittad | Lescent',
+            title: 'Artikel ej hittad – Lescent',
             description: 'Kunde inte hitta artikeln du sökte.',
             robots: {
                 index: false,
-                follow: true
-            }
+                follow: true,
+            },
         };
     }
 
-    return {
-        title: article.title,
-        description: article.seoDescription,
-        keywords: article.keywords,
-        openGraph: {
-            title: `${article.title} | Lescent Journal`,
-            description: article.seoDescription,
-            type: 'article',
-            locale: 'sv_SE',
-            url: `https://lescent.se/blog/${slug}`,
-            publishedTime: new Date(article.date).toISOString(), // Roughly parsing the date string or assuming functionality if needed, keeping simple for now
-            authors: ['Lescent'],
-            images: [{
-                url: article.image,
-                width: 1200,
-                height: 630,
-                alt: article.title,
-            }],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title: article.title,
-            description: article.seoDescription,
-            images: [article.image],
-        },
-        alternates: {
-            canonical: `https://lescent.se/blog/${slug}`,
-        },
-    };
+    // Bloggmetadata bygger på den centrala SEO-tabellen i lib/blog.ts och lib/seo.ts.
+    return generateSeoMetadata('blogArticle', { article });
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -68,51 +39,28 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="min-h-screen pt-44 flex flex-col items-center justify-center text-center px-4">
                 <h1 className="text-3xl font-serif mb-4">Artikeln kunde inte hittas</h1>
                 <Link href="/blog" className="text-primary hover:underline">
-                    Tillbaka till Journalen
+                    Tillbaka till Bloggen
                 </Link>
             </div>
         );
     }
 
-    // JSON-LD Structured Data for Article
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: article.title,
-        description: article.seoDescription,
-        image: `https://lescent.se${article.image}`,
-        datePublished: article.date, // Note: Should ideally be ISO format
-        author: {
-            '@type': 'Organization',
-            name: 'Lescent',
-            url: 'https://lescent.se'
-        },
-        publisher: {
-            '@type': 'Organization',
-            name: 'Lescent',
-            logo: {
-                '@type': 'ImageObject',
-                url: 'https://lescent.se/logo.png' // Assumed logo path
-            }
-        },
-        mainEntityOfPage: {
-            '@type': 'WebPage',
-            '@id': `https://lescent.se/blog/${slug}`
-        }
-    };
+    const breadcrumbSchema = buildBreadcrumbSchema([
+        { name: 'Hem', url: SITE_URL },
+        { name: 'Blogg', url: `${SITE_URL}/blog` },
+        { name: article.title, url: `${SITE_URL}/blog/${article.slug}` },
+    ]);
 
     return (
         <div className="relative isolate min-h-screen pt-44 pb-24 md:pt-52">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
-
+            {/* Artikelschemat speglar sidans innehåll och publiceringsdatum. */}
+            <SchemaMarkup data={buildArticleSchema(article)} />
+            <SchemaMarkup data={breadcrumbSchema} />
             <PageAmbience />
 
             <article className="container max-w-3xl px-6 mx-auto">
                 <Link href="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm uppercase tracking-widest group">
-                    <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Tillbaka till Journalen
+                    <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Tillbaka till Bloggen
                 </Link>
 
                 <header className="space-y-8 mb-12 text-center">
@@ -130,7 +78,7 @@ export default async function BlogPostPage({ params }: Props) {
                 <div className="relative aspect-video mb-16 rounded-lg overflow-hidden shadow-lg">
                     <Image
                         src={article.image}
-                        alt={article.title}
+                        alt={`${article.title} – Lescent Journal om parfymolja`}
                         fill
                         className="object-cover"
                         priority
@@ -148,7 +96,7 @@ export default async function BlogPostPage({ params }: Props) {
                     <p className="mb-6">Vill du utforska dofterna vi pratar om?</p>
                     <Link
                         href="/products"
-                        className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-md font-medium tracking-wide hover:bg-primary/90 transition-all hover:scale-105 shadow-sm"
+                        className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-md font-medium tracking-wide hover:bg-primary/90 transition-all hover:scale-105 shadow-sm not-italic"
                     >
                         Upptäck Kollektionen
                     </Link>

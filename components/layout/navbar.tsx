@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 
 import Link from 'next/link';
-import { Search, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { CartSheet } from 'components/cart/cart-sheet';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from 'components/ui/sheet';
 import { motion } from 'framer-motion';
@@ -13,7 +13,7 @@ import { usePathname } from 'next/navigation';
 const navLinks = [
     { href: '/', label: 'Hem' },
     { href: '/products', label: 'Kollektion' },
-    { href: '/blog', label: 'Journal' },
+    { href: '/blog', label: 'Blogg' },
     { href: '/about', label: 'Om Oss' },
 ];
 
@@ -59,12 +59,12 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
                     : "bg-transparent border-transparent py-4"
             )}
         >
-            <div className="container flex h-20 items-center justify-between px-4 md:px-6">
+            <div className="relative container flex h-20 items-center justify-between px-4 md:px-6">
                 {/* Logo - aligned to the left */}
                 <Link href="/" className="flex items-center flex-shrink-0">
                     <Image
                         src="/Logotype/trasnparentlogo.png"
-                        alt="LESCENT"
+                        alt="Lescent logotyp – oljebaserade parfymer"
                         width={280}
                         height={93}
                         className={cn(
@@ -102,9 +102,7 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
 
                 {/* Mobile Menu */}
                 <div className="flex md:hidden items-center gap-4">
-                    <button className={cn("hover:text-eggshell transition-colors", isScrolled || !isHome ? "text-white" : "text-evergreen")}>
-                        <Search className="h-5 w-5" />
-                    </button>
+
                     {/* Pass custom color class to CartSheet if needed, otherwise it handles itself. Assuming CartSheet icon is styleable or consistent. */}
                     <div className={cn(isScrolled || !isHome ? "text-white" : "text-evergreen")}>
                         <CartSheet cart={cart} />
@@ -139,9 +137,7 @@ export function Navbar({ cart }: { cart: Cart | undefined }) {
                     "hidden md:flex items-center gap-6 transition-colors",
                     isScrolled || !isHome ? "text-white" : "text-evergreen"
                 )}>
-                    <button className="hover:text-eggshell">
-                        <Search className="h-5 w-5" />
-                    </button>
+
 
                     <div className="flex items-center gap-4">
                         <CartSheet cart={cart} />

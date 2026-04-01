@@ -2,10 +2,11 @@
 
 import { ShoppingBag, Plus, Minus } from 'lucide-react';
 import { Button } from 'components/ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from 'components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from 'components/ui/sheet';
 import { Separator } from 'components/ui/separator';
 import { ScrollArea } from 'components/ui/scroll-area';
 import { Cart } from 'lib/shopify/types';
+import { getProductImageAlt } from 'lib/seo';
 import { formatPrice } from 'lib/utils';
 import Image from 'next/image';
 import { useState, useTransition } from 'react';
@@ -50,6 +51,7 @@ export function CartSheet({ cart }: { cart: Cart | undefined }) {
             <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
                 <SheetHeader className="px-1">
                     <SheetTitle className="font-serif text-2xl">Din Varukorg</SheetTitle>
+                    <SheetDescription className="sr-only">Granska och hantera produkterna i din varukorg.</SheetDescription>
                 </SheetHeader>
 
                 {itemCount === 0 ? (
@@ -70,7 +72,7 @@ export function CartSheet({ cart }: { cart: Cart | undefined }) {
                                             {item.merchandise.product.featuredImage && (
                                                 <Image
                                                     src={item.merchandise.product.featuredImage.url}
-                                                    alt={item.merchandise.product.featuredImage.altText || item.merchandise.product.title}
+                                                    alt={getProductImageAlt(item.merchandise.product)}
                                                     fill
                                                     className="object-cover"
                                                 />

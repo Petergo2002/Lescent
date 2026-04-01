@@ -1,18 +1,7 @@
-
 import React from 'react';
+import { generateMetadata as generateSeoMetadata } from 'lib/seo';
 
-
-export const metadata = {
-    title: 'Köpvillkor',
-    description: 'Läs Lescents köpvillkor för beställningar, leverans, ångerrätt och reklamation. Trygg e-handel.',
-    robots: {
-        index: true,
-        follow: true,
-    },
-    alternates: {
-        canonical: 'https://lescent.se/kopvillkor',
-    },
-};
+export const metadata = generateSeoMetadata('terms');
 
 export default function KopvillkorPage() {
     return (

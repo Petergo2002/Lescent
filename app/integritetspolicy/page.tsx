@@ -1,18 +1,7 @@
-
 import React from 'react';
+import { generateMetadata as generateSeoMetadata } from 'lib/seo';
 
-
-export const metadata = {
-    title: 'Integritetspolicy',
-    description: 'Lär dig hur Lescent hanterar dina personuppgifter i enlighet med GDPR. Din integritet är viktig för oss.',
-    robots: {
-        index: true,
-        follow: true,
-    },
-    alternates: {
-        canonical: 'https://lescent.se/integritetspolicy',
-    },
-};
+export const metadata = generateSeoMetadata('privacy');
 
 export default function IntegritetspolicyPage() {
     return (

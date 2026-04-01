@@ -1,61 +1,151 @@
 'use client';
 
+import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Heart, ArrowRight } from 'lucide-react';
+import { Heart, ArrowRight, ShoppingBag, Check, Loader2, Eye } from 'lucide-react';
 import { Product } from 'lib/shopify/types';
-import { formatPrice } from 'lib/utils';
+import { getProductImageAlt } from 'lib/seo';
+import { formatPrice, cn } from 'lib/utils';
+import { addItem } from 'components/cart/actions';
 
 export function ProductCard({ product }: { product: Product }) {
+    const [isPending, startTransition] = useTransition();
+    const [isAdded, setIsAdded] = useState(false);
+    
+    const variantId = product.variants.edges[0]?.node.id;
+
+    const handleQuickAdd = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (!variantId || isPending) return;
+
+        startTransition(async () => {
+            const result = await addItem(null, variantId);
+            if (typeof result !== 'string') {
+                setIsAdded(true);
+                setTimeout(() => setIsAdded(false), 2000);
+            }
+        });
+    };
+
     return (
-        <div className="group relative overflow-hidden rounded-2xl border border-evergreen/10 bg-white p-3 transition-shadow duration-300 hover:shadow-xl">
-            {/* Badges */}
-            <div className="absolute left-4 top-4 z-10">
-                <span className="rounded-full border border-evergreen/10 bg-white/95 px-3 py-1 text-xs font-medium tracking-wide text-evergreen">
-                    NYHET
-                </span>
+        <div className="group relative flex flex-col animate-in fade-in duration-700">
+            {/* Image Container */}
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-[#F5F5F0]">
+                {/* Badges */}
+                <div className="absolute left-3 top-3 z-10 pointer-events-none">
+                    {product.tags.includes('storsäljare') && (
+                        <span className="bg-white/90 backdrop-blur-md px-2.5 py-1 text-[10px] font-bold tracking-[0.2em] uppercase text-evergreen shadow-sm">
+                            Best Seller
+                        </span>
+                    )}
+                </div>
+
+                <Link href={`/products/${product.handle}`} className="relative block h-full w-full">
+                    {product.featuredImage && (
+                        <Image
+                            src={product.featuredImage.url}
+                            alt={getProductImageAlt(product)}
+                            fill
+                            className="object-cover object-center transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110"
+                            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                        />
+                    )}
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/5" />
+                </Link>
+
+                {/* Quick Actions Container - Desktop Only (Hover) */}
+                <div className="absolute bottom-4 left-1/2 hidden lg:flex w-[calc(100%-2.5rem)] -translate-x-1/2 flex-col gap-2 transition-all duration-700 ease-out translate-y-6 opacity-0 pointer-events-none group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto">
+                    {/* Quick Add Button */}
+                    <button 
+                        onClick={handleQuickAdd}
+                        disabled={isPending}
+                        className={cn(
+                            "flex w-full items-center justify-center gap-3 py-3 text-[10px] font-bold tracking-[0.25em] uppercase transition-all duration-300 shadow-2xl backdrop-blur-sm",
+                            isAdded 
+                                ? "bg-custom-green/90 text-white" 
+                                : "bg-black/80 text-white hover:bg-black"
+                        )}
+                    >
+                        {isPending ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : isAdded ? (
+                            <>
+                                <Check className="h-4 w-4" />
+                                <span>TILLAGD</span>
+                            </>
+                        ) : (
+                            <>
+                                <ShoppingBag className="h-4 w-4" />
+                                <span>KÖP NU</span>
+                            </>
+                        )}
+                    </button>
+
+                    {/* View Details Sub-button */}
+                    <Link 
+                        href={`/products/${product.handle}`}
+                        className="flex w-full items-center justify-center gap-2 bg-white/95 py-2 text-[9px] font-bold tracking-[0.2em] uppercase text-black backdrop-blur-md transition-all hover:bg-white border border-black/5"
+                    >
+                        Visa Produkt
+                    </Link>
+                </div>
             </div>
 
-            <button className="absolute right-4 top-4 z-10 rounded-full bg-white/95 p-2 text-black transition-colors duration-200 hover:bg-imperial-blue hover:text-white">
-                <Heart className="h-4 w-4" />
-            </button>
-
-            {/* Image */}
-            <Link href={`/products/${product.handle}`} className="relative block aspect-[3/4] w-full overflow-hidden rounded-xl bg-eggshell/50">
-                {product.featuredImage && (
-                    <Image
-                        src={product.featuredImage.url}
-                        alt={product.featuredImage.altText || product.title}
-                        fill
-                        className="object-cover object-center scale-110 transition-transform duration-700 ease-out group-hover:scale-125"
-                        sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                    />
-                )}
-            </Link>
-
             {/* Content */}
-            <div className="mt-4 space-y-2 px-1">
-                <h3 className="font-serif text-lg font-medium text-foreground transition-colors group-hover:text-imperial-blue">
-                    <Link href={`/products/${product.handle}`}>
+            <div className="mt-6 flex flex-col items-center text-center space-y-1.5 px-2">
+                <Link href={`/products/${product.handle}`}>
+                    <h3 className="font-serif text-xl font-medium tracking-tight text-foreground decoration-evergreen/30 underline-offset-8 group-hover:underline">
                         {product.title}
-                    </Link>
-                </h3>
-                <p className="line-clamp-1 text-xs text-muted-foreground font-light tracking-wide">
-                    {product.description}
+                    </h3>
+                </Link>
+                
+                <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground/80 font-medium pb-1 text-center">
+                    {product.tags.filter(t => t !== 'storsäljare' && t !== 'parfymolja' && t !== 'alkoholfritt')[0] || 'Original'} Blend
                 </p>
 
-                <div className="mt-4 flex items-center justify-between">
-                    <div className="flex flex-col">
-                        <span className="text-base font-medium text-evergreen">
-                            {formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}
-                        </span>
-                    </div>
+                <div className="flex flex-col items-center gap-4 w-full pt-1">
+                    <span className="text-sm font-bold tracking-widest text-evergreen">
+                        {formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}
+                    </span>
 
-                    <Link href={`/products/${product.handle}`}>
-                        <button className="flex h-10 w-10 items-center justify-center rounded-full border border-evergreen/10 bg-evergreen text-white transition-colors duration-200 hover:bg-imperial-blue">
-                            <ArrowRight className="h-4 w-4" />
+                    {/* Mobile Quick Actions - Visible only on mobile/touch */}
+                    <div className="flex flex-col gap-2 w-full lg:hidden pt-2">
+                        <button 
+                            onClick={handleQuickAdd}
+                            disabled={isPending}
+                            className={cn(
+                                "flex w-full items-center justify-center gap-3 py-3 text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300",
+                                isAdded 
+                                    ? "bg-custom-green text-white" 
+                                    : "bg-black text-white active:bg-black/90"
+                            )}
+                        >
+                            {isPending ? (
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : isAdded ? (
+                                <>
+                                    <Check className="h-4 w-4" />
+                                    <span>TILLAGD</span>
+                                </>
+                            ) : (
+                                <>
+                                    <ShoppingBag className="h-4 w-4" />
+                                    <span>KÖP NU</span>
+                                </>
+                            )}
                         </button>
-                    </Link>
+                        <Link 
+                            href={`/products/${product.handle}`}
+                            className="flex w-full items-center justify-center gap-2 border border-black/10 py-2.5 text-[9px] font-bold tracking-[0.2em] uppercase text-black/60 active:bg-black/5 transition-colors"
+                        >
+                            Visa Produkt
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

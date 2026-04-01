@@ -3,8 +3,10 @@ export type BlogPost = {
     id: number;
     slug: string;
     title: string;
+    seoTitle: string;
     excerpt: string;
     date: string;
+    publishedAt: string;
     readTime: string;
     category: string;
     image: string;
@@ -18,9 +20,11 @@ export const BLOG_POSTS: BlogPost[] = [
         id: 1,
         slug: 'alkohol-vs-oljebaserad-parfym',
         title: 'Alkohol vs. Oljebaserad Parfym: Vad är skillnaden?',
-        seoDescription: 'Upptäck varför oljebaserade parfymer är det självklara valet. Lär dig skillnaden mellan alkoholbaserad och oljebaserad parfym och varför olja håller längre.',
+        seoTitle: 'Alkohol vs Oljebaserad Parfym – Vad är Skillnaden? | Lescent',
+        seoDescription: 'Förstå skillnaden mellan alkohol- och oljebaserade parfymer. Varför parfymolja håller längre och luktar bättre på huden.',
         excerpt: 'De flesta kommersiella parfymer består av upp till 90% alkohol. Upptäck varför oljebaserade parfymer är det självklara valet för den medvetna konsumenten.',
         date: '5 Dec, 2025',
+        publishedAt: '2025-12-05',
         readTime: '4 min läsning',
         category: 'Kunskap',
         image: '/blog/oil-vs-alcohol.png',
@@ -49,9 +53,11 @@ export const BLOG_POSTS: BlogPost[] = [
         id: 2,
         slug: 'hur-applicerar-man-parfymolja',
         title: 'Ritualen: Hur du applicerar parfymolja korrekt',
-        seoDescription: 'Lär dig de strategiska pulspunkterna som maximerar din doftupplevelse med oljebaserad parfym. En guide till att applicera parfymolja.',
+        seoTitle: 'Hur Applicerar Man Parfymolja? Guide till Pulspunkter | Lescent',
+        seoDescription: 'Lär dig applicera parfymolja rätt. Guide till de bästa pulspunkterna för maximal doftupplevelse hela dagen.',
         excerpt: 'Att applicera parfymolja är mer än bara en rutin - det är en ritual. Lär dig de strategiska pulspunkterna som maximerar din doftupplevelse.',
         date: '28 Nov, 2025',
+        publishedAt: '2025-11-28',
         readTime: '3 min läsning',
         category: 'Guide',
         image: '/blog/applying-oil.png',
@@ -82,9 +88,11 @@ export const BLOG_POSTS: BlogPost[] = [
         id: 3,
         slug: 'topp-hjarta-basnoter-forklarat',
         title: 'Doftpyramiden Förklarad: Förstå din parfym',
-        seoDescription: 'Förstå varför parfym doftar annorlunda efter en timme. Vi förklarar topp-, hjärt- och basnoter i doftpyramiden.',
+        seoTitle: 'Doftpyramiden Förklarad – Topp, Hjärta & Basnoter | Lescent',
+        seoDescription: 'Vad är topp-, hjärt- och basnoter i parfym? Vi förklarar doftpyramiden och hur din parfym utvecklas under dagen.',
         excerpt: 'Varför doftar din parfym annorlunda efter en timme? Vi dyker ner i doftpyramidens mysterium och förklarar topp-, hjärt- och basnoter.',
         date: '15 Nov, 2025',
+        publishedAt: '2025-11-15',
         readTime: '6 min läsning',
         category: 'Utbildning',
         image: '/blog/fragrance-pyramid.png',
@@ -122,9 +130,11 @@ export const BLOG_POSTS: BlogPost[] = [
         id: 4,
         slug: 'hitta-din-signaturdoft',
         title: 'Konsten att hitta din signaturdoft',
-        seoDescription: 'Din doft är ditt osynliga visitkort. Här är guiden till att hitta parfymen som speglar din personlighet och stil.',
+        seoTitle: 'Hitta Din Signaturdoft – Guide till Din Personliga Parfym | Lescent',
+        seoDescription: 'Hur hittar man sin signaturdoft? Vår guide hjälper dig välja rätt parfymolja som matchar din personlighet och stil.',
         excerpt: 'Din doft är ditt osynliga visitkort. Här är guiden till att hitta parfymen som speglar din personlighet och stil.',
         date: '1 Nov, 2025',
+        publishedAt: '2025-11-01',
         readTime: '5 min läsning',
         category: 'Inspiration',
         image: '/blog/collection.png',
@@ -150,6 +160,66 @@ export const BLOG_POSTS: BlogPost[] = [
 
       <h3>4. Ha tålamod</h3>
       <p>Att hitta sin signaturdoft är en resa. Känner du dig osäker? Beställ vårt <strong>Discovery Set</strong>. Det ger dig chansen att leva med flera olika dofter under några dagar och se vilken som du sträcker dig efter om och om igen. Den du inte kan sluta dofta på – det är din vinnare.</p>
+    `
+    },
+    {
+        id: 5,
+        slug: 'vetenskapen-bakom-olje-extraction',
+        title: 'Vetenskapen Bakom Ren Doft: Hur Parfymolja Extraheras',
+        seoTitle: 'Hur Extraheras Parfymolja? Vetenskapen Bakom Doften | Lescent',
+        seoDescription: 'Lär dig om ångdestillation, koldioxidextraktion och hur vi fångar naturens renaste dofter i våra parfymoljor.',
+        excerpt: 'Bakom varje droppe Lescent ligger avancerad vetenskap. Vi utforskar de exklusiva metoderna som förvandlar växter till flytande guld.',
+        date: '15 Jan, 2026',
+        publishedAt: '2026-01-15',
+        readTime: '5 min läsning',
+        category: 'Vetenskap',
+        image: '/blog/essence-science.png',
+        keywords: ['extraktion', 'ångdestillation', 'doftvetenskap', 'etiska oljor', 'parfymtillverkning'],
+        content: `
+      <h2>Från planta till flaska: En resa i kemi och konst</h2>
+      <p>När du öppnar en flaska från Lescent möts du av naturens mest koncentrerade essens. Men hur hamnar doften där? Processen att extrahera doftmolekyler från blommor, rötter och harts är en balansakt mellan tusenårig tradition och modern teknologi.</p>
+
+      <h3>1. Ångdestillation – Den klassiska metoden</h3>
+      <p>Den vanligaste metoden för att utvinna eteriska oljor är ångdestillation. Genom att låta het ånga passera genom växtmaterialet (som lavendel eller rosor) frigörs doftmolekylerna. Ångan kyls sedan ner och kondenseras till vätska, där oljan flyter ovanpå vattnet. Det är en skonsam metod som bevarar doftens naturliga karaktär.</p>
+
+      <h3>2. Koldioxidextraktion (CO2) – Den moderna revolutionen</h3>
+      <p>För de allra mest exklusiva dofterna använder vi CO2-extraktion. Under högt tryck blir koldioxid "superkritisk" – den får både gasens och vätskans egenskaper. Detta gör att den kan extrahera doftämnen vid mycket låga temperaturer, vilket bevarar molekyler som annars skulle förstöras av värme. Resultatet är en doft som är identisk med den levande växten.</p>
+
+      <h3>3. Varför metoden spelar roll</h3>
+      <p>Billigare parfymer använder ofta kemiska lösningsmedel som hexan. Dessa är effektiva men kan lämna spår efter sig och ger ofta en "plattare" doftupplevelse. Genom att välja renare extraktionsmetoder säkerställer vi att våra oljor är rika, nyanserade och helt fria från oönskade kemikalier.</p>
+
+      <h2>Hantverket bakom Lescent</h2>
+      <p>Varje batch vi producerar genomgår noggranna kontroller för att säkerställa att renheten och potensen är exakt där den ska vara. Det är därför våra oljor upplevs som djupare och mer levande på huden.</p>
+    `
+    },
+    {
+        id: 6,
+        slug: 'hallbarhet-lyx-glas-framfor-plast',
+        title: 'Hållbar Elegans: Varför Vi Väljer Glas Framför Plast',
+        seoTitle: 'Hållbarhet & Lyx – Varför Vi Väljer Glasflaskor | Lescent',
+        seoDescription: 'Upptäck varför glas är överlägset plast för förvaring av parfymoljor och hur Lescent arbetar för en mer hållbar framtid.',
+        excerpt: 'I en värld av engångsplast väljer Lescent en annan väg. Upptäck varför våra tunga glasflaskor är bättre för både doften och planeten.',
+        date: '2 Feb, 2026',
+        publishedAt: '2026-02-02',
+        readTime: '4 min läsning',
+        category: 'Hållbarhet',
+        image: '/blog/sustainability-glass.png',
+        keywords: ['hållbar lyx', 'glas vs plast', 'miljövänlig parfym', 'återvinning', 'premiumförpackning'],
+        content: `
+      <h2>Inget utrymme för kompromisser</h2>
+      <p>När vi grundade Lescent hade vi en vision: vi ville skapa världens bästa parfymoljor utan att det skulle kosta planeten. Ett av våra viktigaste beslut var att helt utesluta plastflaskor för våra dofter.</p>
+
+      <h3>Bevarar doftens integritet</h3>
+      <p>Glas är ett inert material. Det betyder att det inte reagerar med innehållet. Plast kan å andra sidan över tid "läcka" kemikalier in i oljan eller absorbera doftmolekyler, vilket förändrar parfymens profil. Våra tunga glasflaskor fungerar som ett kassaskåp för din doft, och håller den fräsch i åratal.</p>
+
+      <h3>Tidlös återvinningsbarhet</h3>
+      <p>Glas kan återvinnas i all oändlighet utan att förlora i kvalitet. Genom att välja glas minskar vi vårt plastavtryck och uppmuntrar till en cirkulär ekonomi. Dessutom är våra flaskor så vackra att många av våra kunder väljer att behålla dem som prydnad eller återanvända dem för andra ändamål efter att oljan tagit slut.</p>
+
+      <h3>Tyngden av kvalitet</h3>
+      <p>Det finns en unik känsla i att hålla en tung glasflaska. Det signalerar kvalitet, hantverk och medvetenhet. För oss är hållbarhet inte bara ett ord – det är en del av den estetiska upplevelsen av lyx.</p>
+
+      <h2>Vårt löfte</h2>
+      <p>Vi arbetar ständigt med att se över hela vår leveranskedja, från etiskt odlade råvaror till våra förpackningar. För att sann lyx ska kännas bra hela vägen, måste den vara hållbar.</p>
     `
     }
 ];

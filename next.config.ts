@@ -19,6 +19,25 @@ const nextConfig: NextConfig = {
             },
         ],
     },
+    async headers() {
+        return [
+            {
+                source: '/(.*)',
+                headers: [
+                    { key: 'X-Robots-Tag', value: 'index, follow' },
+                ],
+            },
+        ];
+    },
+    async redirects() {
+        return [
+            {
+                source: '/products/ambre-suit',
+                destination: '/products/ambre-nuit',
+                permanent: true,
+            },
+        ];
+    },
 };
 
 export default nextConfig;

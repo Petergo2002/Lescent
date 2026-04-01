@@ -29,6 +29,14 @@ export function FeatureSection() {
                         <p className="max-w-md text-muted-foreground md:text-right">
                             Välkommen till Lescent – handgjorda oljeparfymer från Sverige. Upptäck vår exklusiva kollektion.
                         </p>
+                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground md:justify-end">
+                            <Link href="/parfymolja" className="underline underline-offset-4 hover:text-foreground">
+                                Parfymolja online
+                            </Link>
+                            <Link href="/parfym-utan-alkohol" className="underline underline-offset-4 hover:text-foreground">
+                                Parfym utan alkohol
+                            </Link>
+                        </div>
                         <Button size="lg" className="group gap-2 rounded-full h-12 px-8" asChild>
                             <Link href="/products">
                                 Utforska Mer

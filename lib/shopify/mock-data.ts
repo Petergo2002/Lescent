@@ -45,7 +45,7 @@ export const MOCK_PRODUCTS: Product[] = [
             ]
         },
         seo: { title: 'Arabian Tonka | Lescent', description: 'En magisk doft av saffran och tonkaböna.' },
-        tags: ['kryddig', 'orientalisk'],
+        tags: ['kryddig', 'orientalisk', 'storsäljare', 'parfymolja'],
         updatedAt: new Date().toISOString()
     },
     {
@@ -92,7 +92,7 @@ export const MOCK_PRODUCTS: Product[] = [
             ]
         },
         seo: { title: 'Rouge 540 | Lescent', description: 'Kristallklar sötma och ambra.' },
-        tags: ['ikonisk', 'bärnsten'],
+        tags: ['ikonisk', 'bärnsten', 'storsäljare', 'alkoholfritt'],
         updatedAt: new Date().toISOString()
     },
     {
@@ -139,7 +139,7 @@ export const MOCK_PRODUCTS: Product[] = [
             ]
         },
         seo: { title: 'Royal Layton | Lescent', description: 'Vanilj och lavendel i perfekt harmoni.' },
-        tags: ['kryddig', 'frisk'],
+        tags: ['kryddig', 'frisk', 'parfymolja'],
         updatedAt: new Date().toISOString()
     },
     {
@@ -186,7 +186,7 @@ export const MOCK_PRODUCTS: Product[] = [
             ]
         },
         seo: { title: 'Naxos 1861 | Lescent', description: 'Honung och tobak.' },
-        tags: ['söt', 'tobak'],
+        tags: ['söt', 'tobak', 'parfymolja', 'alkoholfritt'],
         updatedAt: new Date().toISOString()
     },
     {
@@ -233,7 +233,7 @@ export const MOCK_PRODUCTS: Product[] = [
             ]
         },
         seo: { title: 'Oud Maracujá | Lescent', description: 'Passionsfrujt och oud.' },
-        tags: ['exotisk', 'oud'],
+        tags: ['exotisk', 'oud', 'storsäljare', 'parfymolja'],
         updatedAt: new Date().toISOString()
     },
     {
@@ -280,7 +280,7 @@ export const MOCK_PRODUCTS: Product[] = [
             ]
         },
         seo: { title: 'Satin Mood | Lescent', description: 'Ros och vanilj.' },
-        tags: ['blommig', 'sensuell'],
+        tags: ['blommig', 'sensuell', 'alkoholfritt'],
         updatedAt: new Date().toISOString()
     },
     {
@@ -327,7 +327,7 @@ export const MOCK_PRODUCTS: Product[] = [
             ]
         },
         seo: { title: 'Tygar Eye | Lescent', description: 'Grapefrukt och bärnsten.' },
-        tags: ['citrus', 'fräsch'],
+        tags: ['citrus', 'fräsch', 'parfymolja'],
         updatedAt: new Date().toISOString()
     },
     {
@@ -374,9 +374,10 @@ export const MOCK_PRODUCTS: Product[] = [
             ]
         },
         seo: { title: 'Pure Imagination | Lescent', description: 'Te och citrus.' },
-        tags: ['te', 'ren'],
+        tags: ['te', 'ren', 'alkoholfritt'],
         updatedAt: new Date().toISOString()
     }
+
 ];
 
 export const MOCK_CART: Cart = {

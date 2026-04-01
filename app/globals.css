@@ -78,3 +78,19 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary));
 }
+
+@layer components {
+  /* SEO-sektionerna får en lugn och läsbar typografi utan att störa befintlig design. */
+  .product-tagline {
+    letter-spacing: 0.2em;
+  }
+
+  .seo-text p,
+  .product-faq p {
+    max-width: 65ch;
+  }
+
+  .product-faq summary::-webkit-details-marker {
+    display: none;
+  }
+}

@@ -1,64 +1,60 @@
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import { Metadata } from 'next';
-import { getProduct } from 'lib/shopify';
-import { formatPrice } from 'lib/utils';
-import { AddToCart } from './add-to-cart';
 import { Suspense } from 'react';
-import { ProductSchema } from 'components/seo/JsonLd';
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
+import { SchemaMarkup } from 'components/SchemaMarkup';
+import { getProduct } from 'lib/shopify';
+import {
+    buildBreadcrumbSchema,
+    buildFaqSchema,
+    buildProductNotesText,
+    buildProductSchema,
+    generateMetadata as generateSeoMetadata,
+    getProductFaqs,
+    getProductImageAlt,
+    getProductPriceText,
+    getProductSeoContent,
+    getProductTagline,
+    SITE_URL,
+} from 'lib/seo';
+import { AddToCart } from './add-to-cart';
 
 type Props = {
     params: Promise<{ handle: string }>;
 };
 
-/**
- * Genererar dynamisk metadata för varje produktsida.
- * Detta säkerställer att varje produkt har unik title, description och OpenGraph.
- */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { handle } = await params;
 
-    let product;
     try {
-        product = await getProduct(handle);
+        const product = await getProduct(handle);
+
+        if (!product) {
+            return {
+                title: 'Produkt ej hittad – Lescent',
+                description: 'Produkten kunde inte hittas.',
+                robots: {
+                    index: false,
+                    follow: true,
+                },
+            };
+        }
+
+        // All produktspecifik metadata hämtas från den centrala SEO-konfigurationen.
+        return generateSeoMetadata('product', { product });
     } catch {
-        return {};
+        return {
+            title: 'Produkt ej hittad – Lescent',
+            description: 'Produkten kunde inte hittas.',
+            robots: {
+                index: false,
+                follow: true,
+            },
+        };
     }
-
-    if (!product) return {};
-
-    const price = product.priceRange.minVariantPrice;
-    const description = product.description?.slice(0, 160) ||
-        `Köp ${product.title} - exklusiv oljebaserad parfym från Lescent. ${price.amount} ${price.currencyCode}`;
-
-    return {
-        title: product.title,
-        description: description,
-        openGraph: {
-            title: `${product.title} | Lescent`,
-            description: description,
-            images: product.featuredImage ? [{
-                url: product.featuredImage.url,
-                width: 1200,
-                height: 630,
-                alt: product.featuredImage.altText || product.title,
-            }] : [],
-            type: 'website',
-            locale: 'sv_SE',
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title: `${product.title} | Lescent`,
-            description: description,
-            images: product.featuredImage ? [product.featuredImage.url] : [],
-        },
-        alternates: {
-            canonical: `https://lescent.se/products/${handle}`,
-        },
-    };
 }
 
-export default async function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
+export default async function ProductPage({ params }: Props) {
     const { handle } = await params;
 
     let product;
@@ -69,61 +65,74 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
         return notFound();
     }
 
-    if (!product) return notFound();
+    if (!product) {
+        return notFound();
+    }
 
-    const { url, altText } = product.featuredImage || {};
+    const seoContent = getProductSeoContent(product);
+    const faqs = getProductFaqs(product);
     const variant = product.variants.edges[0]?.node;
+    const imageUrl = product.featuredImage?.url;
+
+    const breadcrumbSchema = buildBreadcrumbSchema([
+        { name: 'Hem', url: SITE_URL },
+        { name: 'Parfymer', url: `${SITE_URL}/products` },
+        { name: product.title, url: `${SITE_URL}/products/${product.handle}` },
+    ]);
 
     return (
         <div className="bg-background min-h-screen text-foreground pt-32 lg:pt-0">
-            <ProductSchema product={product} />
-            {/* Desktop Split Layout */}
+            {/* Produkt-, FAQ- och brödsmuleschemat hjälper Google att förstå sidan semantiskt. */}
+            <SchemaMarkup data={buildProductSchema(product)} />
+            <SchemaMarkup data={buildFaqSchema(product)} />
+            <SchemaMarkup data={breadcrumbSchema} />
+
             <div className="lg:flex">
-                {/* Left: Sticky Image Gallery */}
+                {/* Bildytan hålls sticky på desktop för att produktinnehåll och SEO-text ska kunna växa. */}
                 <div className="relative w-full lg:w-1/2 lg:h-[calc(100vh-112px)] lg:sticky lg:top-28 h-[60vh] bg-secondary/5 overflow-hidden">
-                    {url && (
+                    {imageUrl && (
                         <Image
-                            src={url}
-                            alt={altText || product.title}
+                            src={imageUrl}
+                            alt={getProductImageAlt(product)}
                             fill
                             className="object-cover object-center scale-110"
                             priority
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     )}
-                    {/* Gradient Overlay for text contrast on mobile */}
                     <div className="absolute bottom-0 z-10 h-1/3 w-full bg-gradient-to-t from-background via-transparent to-transparent lg:hidden" />
                 </div>
 
-                {/* Right: Scrollable Content */}
                 <div className="relative w-full lg:w-1/2 px-6 py-12 lg:px-24 lg:pt-48 lg:pb-32 space-y-16">
-                    {/* Header Section */}
+                    {/* Här ligger den kommersiella primärinformationen nära toppen för både användare och sökmotorer. */}
                     <div className="space-y-6 animate-in slide-in-from-bottom-8 duration-700">
                         <div className="flex items-center gap-4">
                             <div className="h-[1px] w-8 bg-primary/20" />
                             <span className="text-muted-foreground text-sm tracking-[0.3em] uppercase font-medium">
-                                Inspirerad Utav
+                                Inspirerad av {seoContent.brand}
                             </span>
                         </div>
 
-                        <h1 className="font-serif text-5xl lg:text-7xl font-medium leading-tight tracking-tight text-foreground">
-                            {product.title}
+                        <h1 className="font-serif text-4xl lg:text-6xl font-medium leading-tight tracking-tight text-foreground">
+                            {product.title} – Parfymolja inspirerad av {seoContent.brand}
                         </h1>
 
-                        <div className="flex items-center gap-6 text-xl">
-                            <p className="font-medium text-foreground">
-                                {formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}
-                            </p>
-                            <span className="text-muted-foreground text-sm uppercase tracking-wide">10 ML</span>
-                        </div>
-
+                        <p className="product-tagline text-sm uppercase tracking-[0.25em] text-muted-foreground">
+                            {getProductTagline(product)}
+                        </p>
 
                         <div
                             className="text-lg text-muted-foreground font-light leading-relaxed max-w-lg prose prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-em:text-foreground/80"
                             dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
                         />
 
-                        {/* Purchase Action */}
+                        <div className="flex items-center gap-6 text-xl">
+                            <p className="font-medium text-foreground">
+                                {getProductPriceText(product)}
+                            </p>
+                            <span className="text-muted-foreground text-sm uppercase tracking-wide">10 ML</span>
+                        </div>
+
                         <div className="pt-8">
                             <Suspense fallback={null}>
                                 {variant && (
@@ -133,21 +142,56 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                         </div>
                     </div>
 
-                    {/* Details Grid */}
-                    <div className="grid grid-cols-2 gap-8 border-t border-black/10 pt-16">
+                    <div className="grid grid-cols-1 gap-8 border-t border-black/10 pt-16 md:grid-cols-2">
                         <div className="space-y-4">
-                            <h3 className="font-serif text-xl text-foreground">Oljebaserad</h3>
+                            <p className="font-serif text-xl text-foreground">Oljebaserad parfym</p>
                             <p className="text-sm text-muted-foreground leading-relaxed">
-                                100% ren parfymolja utan alkohol för en djupare, mer intim doftupplevelse som varar längre.
+                                100% koncentrerad parfymolja utan alkohol för en djupare och mjukare doftupplevelse som håller längre på huden.
                             </p>
                         </div>
                         <div className="space-y-4">
-                            <h3 className="font-serif text-xl text-foreground">Hantverk</h3>
+                            <p className="font-serif text-xl text-foreground">Handgjord i Sverige</p>
                             <p className="text-sm text-muted-foreground leading-relaxed">
-                                Varje flaska fylls för hand i Sverige med ingredienser av högsta kvalitet.
+                                Varje flaska fylls med omsorg för att ge dig långvarig doft, hög koncentration och en lyxig känsla i varje applicering.
                             </p>
                         </div>
                     </div>
+
+                    {/* Detta block ger varje produktsida mer indexerbart innehåll kring doft, användning och sökintention. */}
+                    <section className="seo-text space-y-6 border-t border-black/10 pt-16">
+                        <h2 className="font-serif text-3xl text-foreground">Om denna doftinspiration</h2>
+                        <p className="text-muted-foreground leading-relaxed">
+                            {product.title} är vår oljebaserade tolkning av {seoContent.originalName} från {seoContent.brand}. Som alla våra parfymoljor är den fri från alkohol, vilket ger en mjukare och djupare doftupplevelse som håller längre på huden. Perfekt för dig som söker en långvarig parfymolja online till rätt pris.
+                        </p>
+
+                        <h3 className="font-serif text-2xl text-foreground">Doftnoter</h3>
+                        <p className="text-muted-foreground leading-relaxed">
+                            {buildProductNotesText(product)}
+                        </p>
+
+                        <h3 className="font-serif text-2xl text-foreground">Varför oljebaserad parfym?</h3>
+                        <p className="text-muted-foreground leading-relaxed">
+                            Oljebaserade parfymer sitter längre på huden än alkoholbaserade alternativ eftersom oljan binder sig till hudens naturliga fukt. Du behöver mindre produkt för samma effekt, och doften utvecklas mjukare under dagen utan den skarpa alkoholöppningen som många traditionella parfymer har.
+                        </p>
+                    </section>
+
+                    {/* FAQ-blocket återanvänder samma frågor som FAQ-schemat för att hålla innehåll och markup synkade. */}
+                    <section className="product-faq space-y-6 border-t border-black/10 pt-16">
+                        <h2 className="font-serif text-3xl text-foreground">Vanliga frågor</h2>
+
+                        <div className="space-y-4">
+                            {faqs.map((faq) => (
+                                <details key={faq.question} className="rounded-2xl border border-black/10 bg-secondary/5 px-5 py-4">
+                                    <summary className="cursor-pointer list-none font-medium text-foreground">
+                                        {faq.question}
+                                    </summary>
+                                    <p className="pt-3 text-sm leading-relaxed text-muted-foreground">
+                                        {faq.answer}
+                                    </p>
+                                </details>
+                            ))}
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>

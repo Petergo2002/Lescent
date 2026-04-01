@@ -1,34 +1,99 @@
+import Link from 'next/link';
+import { Droplets, Leaf, ArrowRight } from 'lucide-react';
 import { Product } from 'lib/shopify/types';
 import { ProductCard } from 'components/ui/product-card';
 import { Button } from 'components/ui/button';
 
+// ─── Category Teaser Card ──────────────────────────────────────────────────
+// Replaces the old bare underlined footnote links with proper clickable cards.
+
+function CategoryTeaserCard({
+    href,
+    icon,
+    title,
+    description,
+}: {
+    href: string;
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+}) {
+    return (
+        <Link href={href} className="group block">
+            <div className="flex items-center gap-6 rounded-sm border border-evergreen/5 bg-white/50 p-6 backdrop-blur-sm transition-all duration-500 hover:border-evergreen/20 hover:bg-white hover:shadow-2xl hover:shadow-evergreen/5">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-evergreen/5 transition-colors group-hover:bg-evergreen group-hover:text-white">
+                    <div className="transition-transform duration-500 group-hover:scale-110">
+                        {icon}
+                    </div>
+                </div>
+                <div className="flex-1">
+                    <p className="font-serif text-lg font-medium text-foreground tracking-tight">{title}</p>
+                    <p className="mt-1 text-xs font-light leading-relaxed text-muted-foreground/80">{description}</p>
+                </div>
+                <div className="flex h-8 w-8 items-center justify-center rounded-full border border-evergreen/10 transition-all group-hover:translate-x-1 group-hover:bg-evergreen group-hover:text-white">
+                    <ArrowRight className="h-3 w-3" />
+                </div>
+            </div>
+        </Link>
+    );
+}
+
+// ─── ProductGrid ───────────────────────────────────────────────────────────
+
 export function ProductGrid({ products }: { products: Product[] }) {
     return (
-        <section className="container py-20 md:py-32 relative z-10">
-            <div className="mb-16 text-center space-y-4">
-                <div className="flex items-center justify-center gap-4 mb-4">
-                    <div className="h-[1px] w-12 bg-evergreen/30" />
-                    <span className="text-xs font-medium tracking-[0.3em] uppercase text-evergreen/80">Kollektionen</span>
-                    <div className="h-[1px] w-12 bg-evergreen/30" />
+        <section className="container relative z-10 py-24 md:py-40">
+            {/* Section Header */}
+            <div className="mb-20 space-y-6 text-center">
+                <div className="flex items-center justify-center gap-3 mb-6">
+                    <div className="h-[1px] w-10 bg-evergreen/20" />
+                    <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-evergreen/60">
+                        Utvalt För Dig
+                    </span>
+                    <div className="h-[1px] w-10 bg-evergreen/20" />
                 </div>
-                <h2 className="font-serif text-5xl font-medium text-foreground tracking-wide">Utvalda Favoriter</h2>
-                <p className="text-muted-foreground font-light tracking-wide max-w-xl mx-auto">
-                    Utforska vår noga utvalda samling av hantverksmässiga dofter. Varje flaska bär på en unik berättelse.
+                <h2 className="font-serif text-4xl md:text-6xl font-medium tracking-tight text-foreground">
+                    Upptäck Dofterna
+                </h2>
+                <p className="mx-auto max-w-2xl font-light leading-relaxed text-muted-foreground/90 md:text-lg">
+                    Vårt hantverk förenar urgamla traditioner med modern lyx. Upplev skillnaden med ren parfymolja.
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 mb-24">
+            {/* Product Cards */}
+            <div className="mb-24 grid grid-cols-1 gap-x-8 gap-y-20 sm:grid-cols-2 lg:grid-cols-4 animate-in fade-in slide-in-from-bottom-10 duration-1000">
                 {products.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>
 
-            <div className="flex justify-center">
-                <a href="/products">
-                    <Button size="lg" className="h-14 px-10 rounded-full text-sm font-medium tracking-widest uppercase">
-                        Se Hela Kollektionen
+            {/* ─ Category Teaser Strip */}
+            <div className="mb-16 grid grid-cols-1 gap-6 md:grid-cols-2 max-w-5xl mx-auto">
+                <CategoryTeaserCard
+                    href="/parfymolja"
+                    icon={<Droplets className="h-5 w-5" />}
+                    title="Signatur Parfymolja"
+                    description="Koncentrerade, oljebaserade dofter som stannar med dig hela dagen. 100% ren essens."
+                />
+                <CategoryTeaserCard
+                    href="/parfym-utan-alkohol"
+                    icon={<Leaf className="h-5 w-5" />}
+                    title="Alkoholfritt & Milt"
+                    description="Vänlig mot både huden och naturen. En sofistikerad doftupplevelse utan irritation."
+                />
+            </div>
+
+            {/* Primary CTA */}
+            <div className="flex justify-center pt-8">
+                <Link href="/products">
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        className="h-14 rounded-full px-12 text-[11px] font-bold tracking-[0.2em] uppercase border-evergreen/20 hover:bg-evergreen hover:text-white transition-all duration-300 hover:shadow-xl hover:shadow-evergreen/10"
+                    >
+                        Utforska Hela Kollektionen
                     </Button>
-                </a>
+                </Link>
             </div>
         </section>
     );

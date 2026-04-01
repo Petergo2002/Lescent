@@ -176,10 +176,11 @@ function TimelineItem({ align, title, subtitle, description, imageSrc, icon }: {
                     <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-700 z-10 mix-blend-overlay" />
                     <Image
                         src={imageSrc}
-                        alt={title}
+                        alt={`${title} – Lescents värld av oljebaserade parfymer`}
                         fill
                         className="object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
                         unoptimized
+                        priority={imageSrc === '/images/oil-perfume-craftsmanship.png'}
                     />
                     {/* Glass Overlay Border */}
                     <div className="absolute inset-0 border-[1px] border-white/10 z-20" />

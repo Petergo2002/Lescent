@@ -1,79 +1,17 @@
-import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
-import "./globals.css";
-import { Navbar } from "components/layout/navbar";
-import { cn } from "lib/utils";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
-
-export const metadata: Metadata = {
-    metadataBase: new URL('https://lescent.se'),
-    title: {
-        default: 'Lescent | Exklusiva Oljebaserade Parfymer',
-        template: '%s | Lescent'
-    },
-    description: 'Upptäck din signaturdoft med Lescents exklusiva kollektion av handgjorda oljebaserade parfymer. Alkoholfria, långvariga dofter skapade i Sverige.',
-    keywords: [
-        'parfym', 'oljebaserad parfym', 'parfymolja', 'lescent',
-        'lyxparfym', 'svensk parfym', 'alkoholfri parfym',
-        'handgjord parfym', 'doft', 'exklusiv parfym'
-    ],
-    authors: [{ name: 'Lescent', url: 'https://lescent.se' }],
-    creator: 'Lescent',
-    publisher: 'Lescent',
-    formatDetection: {
-        email: false,
-        address: false,
-        telephone: false,
-    },
-    openGraph: {
-        type: 'website',
-        locale: 'sv_SE',
-        url: 'https://lescent.se',
-        siteName: 'Lescent',
-        title: 'Lescent | Exklusiva Oljebaserade Parfymer',
-        description: 'Upptäck din signaturdoft med Lescents handgjorda oljebaserade parfymer.',
-        images: [
-            {
-                url: '/og-image.jpg',
-                width: 1200,
-                height: 630,
-                alt: 'Lescent - Exklusiva Oljebaserade Parfymer',
-            },
-        ],
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'Lescent | Exklusiva Oljebaserade Parfymer',
-        description: 'Upptäck din signaturdoft med Lescents handgjorda oljebaserade parfymer.',
-        images: ['/og-image.jpg'],
-    },
-    robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-            index: true,
-            follow: true,
-            'max-video-preview': -1,
-            'max-image-preview': 'large',
-            'max-snippet': -1,
-        },
-    },
-    alternates: {
-        canonical: 'https://lescent.se',
-        languages: {
-            'sv-SE': 'https://lescent.se',
-        },
-    },
-    // Icons handled automatically by app/icon.png
-    manifest: '/manifest.json',
-};
-
-import { getCart } from 'lib/shopify';
+import type { Metadata } from 'next';
+import { Inter, Playfair_Display } from 'next/font/google';
+import './globals.css';
+import { Navbar } from 'components/layout/navbar';
 import { getCartId } from 'components/cart/actions';
+import { getCart } from 'lib/shopify';
+import { generateMetadata as generateSeoMetadata } from 'lib/seo';
+import { cn } from 'lib/utils';
 
-// ... imports
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
+
+// Centraliserad standardmetadata för hela sajten.
+export const metadata: Metadata = generateSeoMetadata('default');
 
 export default async function RootLayout({
     children,
@@ -85,7 +23,7 @@ export default async function RootLayout({
 
     return (
         <html lang="sv">
-            <body className={cn(inter.variable, playfair.variable, "min-h-screen bg-background font-sans antialiased relative")} suppressHydrationWarning={true}>
+            <body className={cn(inter.variable, playfair.variable, 'min-h-screen bg-background font-sans antialiased relative')} suppressHydrationWarning={true}>
                 <Navbar cart={cart} />
                 <main className="flex-1">
                     {children}
@@ -102,7 +40,7 @@ export default async function RootLayout({
                             <h4 className="mb-4 font-medium">Länkar</h4>
                             <ul className="space-y-2 text-sm text-muted-foreground">
                                 <li><a href="/products" className="hover:text-primary">Parfymer</a></li>
-                                <li><a href="/blog" className="hover:text-primary">Journal</a></li>
+                                <li><a href="/blog" className="hover:text-primary">Blogg</a></li>
                                 <li><a href="/about" className="hover:text-primary">Om Oss</a></li>
                                 <li><a href="/contact" className="hover:text-primary">Kontakt</a></li>
                                 <li><a href="/kopvillkor" className="hover:text-primary">Köpvillkor</a></li>
