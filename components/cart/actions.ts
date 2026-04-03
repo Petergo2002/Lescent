@@ -1,6 +1,7 @@
 'use server';
 
 import { addToCart, createCart, removeFromCart, updateCart } from 'lib/shopify';
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 
 export async function getCartId() {
@@ -37,6 +38,7 @@ export async function addItem(_prevState: unknown, selectedVariantId: string | u
         cart = await addToCart(cart.id, [{ merchandiseId: selectedVariantId, quantity: 1 }]);
     }
 
+    revalidatePath('/', 'layout');
     return cart;
 }
 
@@ -68,6 +70,7 @@ export async function updateItemQuantity(
                 }
             ]);
         }
+        revalidatePath('/', 'layout');
     } catch {
         return 'Error updating item quantity';
     }
@@ -82,6 +85,7 @@ export async function removeItem(_prevState: unknown, lineId: string) {
 
     try {
         await removeFromCart(cartId, [lineId]);
+        revalidatePath('/', 'layout');
     } catch {
         return 'Error removing item from cart';
     }

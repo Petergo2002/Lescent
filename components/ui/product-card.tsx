@@ -3,7 +3,8 @@
 import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Heart, ArrowRight, ShoppingBag, Check, Loader2, Eye } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { ShoppingBag, Check, Loader2 } from 'lucide-react';
 import { Product } from 'lib/shopify/types';
 import { getProductImageAlt } from 'lib/seo';
 import { formatPrice, cn } from 'lib/utils';
@@ -12,6 +13,7 @@ import { addItem } from 'components/cart/actions';
 export function ProductCard({ product }: { product: Product }) {
     const [isPending, startTransition] = useTransition();
     const [isAdded, setIsAdded] = useState(false);
+    const router = useRouter();
     
     const variantId = product.variants.edges[0]?.node.id;
 
@@ -25,6 +27,7 @@ export function ProductCard({ product }: { product: Product }) {
             const result = await addItem(null, variantId);
             if (typeof result !== 'string') {
                 setIsAdded(true);
+                router.refresh();
                 setTimeout(() => setIsAdded(false), 2000);
             }
         });
