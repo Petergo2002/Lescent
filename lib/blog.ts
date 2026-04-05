@@ -221,6 +221,93 @@ export const BLOG_POSTS: BlogPost[] = [
       <h2>Vårt löfte</h2>
       <p>Vi arbetar ständigt med att se över hela vår leveranskedja, från etiskt odlade råvaror till våra förpackningar. För att sann lyx ska kännas bra hela vägen, måste den vara hållbar.</p>
     `
+    },
+    {
+        id: 7,
+        slug: 'doftgarderob-var-sommar',
+        title: 'Uppdatera Doftgarderoben: Varför du bör byta parfym efter årstid',
+        seoTitle: 'Byt Parfym Efter Årstid – Vår och Sommar Doftguide | Lescent',
+        seoDescription: 'Upptäck varför väderleken påverkar din parfym och hur du bäst navigerar bland doftnoter när solen tittar fram. Exklusiv doftguide från Lescent.',
+        excerpt: 'Samma parfym dygnet runt, året om? Dags att tänka om. Upptäck varför värme, fukt och säsongsskiftningar är avgörande för din doftupplevelse.',
+        date: '6 Apr, 2026',
+        publishedAt: '2026-04-06',
+        readTime: '4 min läsning',
+        category: 'Inspiration',
+        image: '/blog/spring-summer.png',
+        keywords: ['vårparfym', 'sommarparfym', 'byta parfym', 'doftnoter', 'värme och parfym'],
+        content: `
+      <h2>Varför doftar parfym olika beroende på väder?</h2>
+      <p>Doft är levande kemi. Precis som naturen skiftar karaktär när vårsolen värmer upp jorden, reagerar din parfymolja på din kroppstemperatur och klimatet i din omgivning. När temperaturen stiger, avdunstar doftmolekyler snabbare och de framträder kraftfullare. En doft som kändes varm och omfamnande i december kylan kan lätt bli övermäktig och kvävande en varm julidag.</p>
+
+      <h3>Luftfuktighetens överraskande effekt</h3>
+      <p>På sommaren innehåller luften ofta mer fukt, vilket förstärker doften. Vattnet i luften fungerar som en bärare som sprider aromerna effektivare. Lättare dofter, som citrus, lätta blommor och ljusa trän, får utrymme att blomstra i luften utan att kännas tunga. På vintern, när luften är torr, behöver du i stället tyngre och sötare noter för att de överhuvudtaget ska märkas.</p>
+
+      <h3>Noter att satsa på under våren och sommaren</h3>
+      <p>För att möta de varmare månaderna rekommenderar vi att du söker dig till doftfamiljer som är krispiga, uppfriskande och energiingivande. Tänk gnistrande <strong>bergamott</strong>, solmogen <strong>grapefrukt</strong>, upplyftande tär eller diskret saltvatten. Dessa noter stannar eleganta och sofistikerade, oavsett hur intensiv solen är.</p>
+
+      <h2>Tygar Eye – Din ultimata följeslagare i värmen</h2>
+      <p>Letar du efter den perfekta doften för varmare tider? Vi rekommenderar starkt vår bästsäljare <a href="/products/bvlgari-le-gemme-tygar" title="Upptäck Tygar Eye Parfymolja"><strong>Tygar Eye</strong></a>. Med en kraftfull explosion av grapefrukt kombinerad med en vibrerande kärna av ingefära och en sofistikerad bas av ambra, fungerar den som en uppfriskande oas. Den är krispig, kraftfull och oändligt exklusiv – ett självklart val när temperaturen stiger.</p>
+    `
+    },
+    {
+        id: 8,
+        slug: 'parfymens-psykologi-och-valmaende',
+        title: 'Doftandets Kraft: Hur parfym påverkar ditt humör och välmående',
+        seoTitle: 'Doftpsykologi – Hur Parfym Påverkar Humör och Välmående | Lescent',
+        seoDescription: 'Lär dig om parfymens psykologi. Utforska hur olika doftnoter kan minska stress, öka självförtroendet och förbättra ditt mentala välmående.',
+        excerpt: 'Din parfym är mer än bara en doft; det är ett verktyg för ditt sinne. Dyk ner i vetenskapen bakom hur rätt doft kan transformera ditt humör.',
+        date: '8 Apr, 2026',
+        publishedAt: '2026-04-08',
+        readTime: '5 min läsning',
+        category: 'Kunskap',
+        image: '/blog/scent-psychology.png',
+        keywords: ['doftpsykologi', 'välmående', 'parfym humör', 'arometerapi', 'självförtroende'],
+        content: `
+      <h2>En Direktlänk till Känslornas Centrum</h2>
+      <p>Av alla våra fem sinnen är luktsinnet det mest fascinerande. Till skillnad från syn eller hörsel, processas inte dofter först av hjärnans rationella del. Istället färdas de direkt via luktnerven till det limbiska systemet – hjärnans primära struktur för känslor och minnen. Detta är förklaringen till varför en specifik doft från barndomen omedelbart kan framkalla en intensiv känslovåg eller ett uråldrigt minne, snabbare än en tanke hinner formas.</p>
+
+      <h3>Bära självförtroende på huden</h3>
+      <p>Vad du bär på huden sänder signaler inte bara till din omgivning, utan i allra högsta grad till dig själv. Neurovetenskapliga studier visar att personer som bär en parfym de älskar uppvisar en mätbar ökning i självförtroende och social närvaro. En elegant, kryddig doft kan bokstavligen få dig att stå rakare i ryggen inför ett viktigt möte.</p>
+
+      <h3>Minska stress och hitta lugnet</h3>
+      <p>Vi lever i en konstant uppkopplad och intensiv värld. Att applicera en oljebaserad parfym blir därmed något mer än en kosmetisk akt – det är en stunds mindfulness. Doftnoter som mjuk vanilj, lugnande lavendel och varma träslag sänker, bevisligen, hjärtfrekvensen och reducerar stress. Det är som en osynlig sköld av ro som du bär med dig under hela dagen.</p>
+
+      <h2>Satin Mood – Välmående på flaska</h2>
+      <p>Vill du utforska en doft designad för djup harmoni och subtil, inre styrka? Då är <a href="/products/maison-francis-kurkdjian-oud-satin-mood" title="Upptäck Satin Mood Parfymolja"><strong>Satin Mood</strong></a> rätt val. Dess utsökta symfoni av bulgarisk ros och mjukt pudrig vanilj omsluter dig likt det finaste silke. Den skapar en omedelbar känsla av lugn, sensualitet och lyx. Applicera den på kvällen, andas in, och låt stillheten ta över.</p>
+    `
+    },
+    {
+        id: 9,
+        slug: 'layering-kombinera-flera-dofter',
+        title: 'Layering: Konsten att kombinera parfymer för din unika signatur',
+        seoTitle: 'Parfym Layering Guide – Konsten att Kombinera Dofter | Lescent',
+        seoDescription: 'Var din egen parfymör. Lär dig grunderna i "layering" och hur du kan kombinera olika parfymoljor för att skapa ett helt unikt och personligt doftuttryck.',
+        excerpt: 'Varför nöja sig med en doft när du kan skapa din egen? Vi guidar dig genom layering – konsten att blanda dofter som ett riktigt proffs.',
+        date: '10 Apr, 2026',
+        publishedAt: '2026-04-10',
+        readTime: '4 min läsning',
+        category: 'Guide',
+        image: '/blog/layering-guide.png',
+        keywords: ['layering parfym', 'kombinera dofter', 'blanda parfym', 'unik signaturdoft', 'parfymguide'],
+        content: `
+      <h2>Var din egen Parfymör</h2>
+      <p>En exklusiv parfymolja är ett mästerverk i sig, men ibland vill man vara ensam i hela världen om sitt doftuttryck. "Layering", eller doftskiktning, handlar om att bära två (eller ibland tre) olika parfymer samtidigt för att komponera en helt ny, skräddarsydd doft. Eftersom Lescents parfymer är rena oljor – fria från alkoholens skarpa "clash" – blandas de gudomligt mjukt och naturligt med varandra på din hud.</p>
+
+      <h3>Grundregeln: Tung bas, lätt topp</h3>
+      <p>För att lyckas med layering utan att det blir en osammanhängande krock, tillämpar parfymörer en gyllene regel: <strong>Applicera alltid den tyngsta doften först.</strong> Om du börjar med en rik, djup oud, trä- eller vaniljdoft, och sedan duttar över en lättare, citrus- eller ren tedoft, tillåter du toppens friskhet att gnistra, samtidigt som den får en magnifik, stabil grund att dansa på.</p>
+
+      <h3>De bästa kombinationerna att starta med</h3>
+      <p>Om du är nybörjare, rekommenderar vi att experimentera med motsatser som attraherar varandra:
+      <ul>
+        <li><strong>Sött möter Kryddigt:</strong> Mjuka upp en kraftig kryddig doft med lite len vanilj.</li>
+        <li><strong>Trä möter Frukt:</strong> Låt en torr tränote få liv med hjälp av en tropisk fruktnot.</li>
+        <li><strong>Orientaliskt möter Friskt:</strong> Ge luft åt mörka, komplexa harts-noter med en gnistrande, ren teblandning.</li>
+      </ul>
+      </p>
+
+      <h2>Den Optimala Kombinationen för Layering</h2>
+      <p>Vill du uppleva kontrastens mästerskap i praktiken? Prova att applicera <a href="/products/arabian-tonka" title="Upptäck Arabian Tonka Parfymolja"><strong>Arabian Tonka</strong></a> som en djup, varm och kryddig bas på insidan av handlederna. Ge den en minut. Toppa den sedan med några försiktiga droppar av den otroligt eleganta <a href="/products/xerjoff-naxos" title="Upptäck Xerjoff Naxos Parfymolja"><strong>Xerjoff Naxos</strong></a>. Den varma, saffranskryddade tonkabönan i botten möter den citrus- och honungssöta friskheten från Naxos och svävar ut i en unik harmoni som garanterat genererar komplimanger hela kvällen.</p>
+    `
     }
 ];
 
