@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { SchemaMarkup } from 'components/SchemaMarkup';
 import { getProduct } from 'lib/shopify';
+import { getVersionedProductImageUrl } from 'lib/shopify/images';
 import {
     buildBreadcrumbSchema,
     buildFaqSchema,
@@ -72,7 +73,7 @@ export default async function ProductPage({ params }: Props) {
     const seoContent = getProductSeoContent(product);
     const faqs = getProductFaqs(product);
     const variant = product.variants.edges[0]?.node;
-    const imageUrl = product.featuredImage?.url;
+    const imageUrl = getVersionedProductImageUrl(product);
 
     const breadcrumbSchema = buildBreadcrumbSchema([
         { name: 'Hem', url: SITE_URL },

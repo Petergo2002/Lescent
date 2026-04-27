@@ -34,6 +34,7 @@ const SHOPIFY_TO_PUBLIC_HANDLE = Object.entries(PRODUCT_HANDLE_ALIASES).reduce<R
 
 const getShopifyHandle = (handle: string) => PRODUCT_HANDLE_ALIASES[handle] ?? handle;
 const getPublicHandle = (handle: string) => SHOPIFY_TO_PUBLIC_HANDLE[handle] ?? handle;
+const SHOPIFY_PRODUCT_REVALIDATE_SECONDS = 60;
 
 const withPublicHandle = (product: Product): Product => {
     const publicHandle = getPublicHandle(product.handle);
@@ -142,7 +143,8 @@ export async function getProducts({
             reverse,
             sortKey
         },
-        cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'force-cache'
+        cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'force-cache',
+        revalidate: process.env.NODE_ENV === 'development' ? undefined : SHOPIFY_PRODUCT_REVALIDATE_SECONDS
     });
 
     return res.body.data.products.edges.map((edge) => withPublicHandle(edge.node));
@@ -163,7 +165,8 @@ export async function getProduct(handle: string): Promise<Product | undefined> {
             variables: {
                 handle: shopifyHandle
             },
-            cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'force-cache'
+            cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'force-cache',
+            revalidate: process.env.NODE_ENV === 'development' ? undefined : SHOPIFY_PRODUCT_REVALIDATE_SECONDS
         });
 
         const product = res.body.data.product;

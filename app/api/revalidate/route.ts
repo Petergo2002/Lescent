@@ -1,9 +1,16 @@
-import { revalidateTag } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import { TAGS } from 'lib/constants';
 
-// Manual revalidation endpoint for admin use
-export async function POST(req: NextRequest) {
+function revalidateStorefrontCache() {
+    revalidateTag(TAGS.products, { expire: 0 });
+    revalidateTag(TAGS.collections, { expire: 0 });
+    revalidatePath('/');
+    revalidatePath('/products');
+    revalidatePath('/products/[handle]', 'page');
+}
+
+async function handleRevalidate(req: NextRequest) {
     try {
         const { searchParams } = new URL(req.url);
         const secret = searchParams.get('secret');
@@ -12,11 +19,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
         }
 
-        // Clear all product and collection caches
-        // @ts-expect-error Next.js 16 type mismatch
-        revalidateTag(TAGS.products);
-        // @ts-expect-error Next.js 16 type mismatch
-        revalidateTag(TAGS.collections);
+        revalidateStorefrontCache();
 
         return NextResponse.json({
             revalidated: true,
@@ -28,4 +31,13 @@ export async function POST(req: NextRequest) {
             message: 'Error clearing cache'
         }, { status: 500 });
     }
+}
+
+// Manual revalidation endpoint for admin use and cron calls.
+export async function GET(req: NextRequest) {
+    return handleRevalidate(req);
+}
+
+export async function POST(req: NextRequest) {
+    return handleRevalidate(req);
 }

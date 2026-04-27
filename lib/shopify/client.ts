@@ -18,16 +18,24 @@ export async function shopifyFetch<T>({
     cache = 'force-cache',
     headers,
     query,
+    revalidate,
     tags,
     variables
 }: {
     cache?: RequestCache;
     headers?: HeadersInit;
     query: string;
+    revalidate?: number | false;
     tags?: string[];
     variables?: ExtractVariables<T>;
 }): Promise<{ status: number; body: T } | never> {
     const { domain, endpoint, key } = getShopifyConfig();
+    const nextOptions = tags || revalidate !== undefined
+        ? {
+            ...(tags && { tags }),
+            ...(revalidate !== undefined && { revalidate })
+        }
+        : undefined;
 
     try {
         const result = await fetch(endpoint, {
@@ -42,7 +50,7 @@ export async function shopifyFetch<T>({
                 ...(variables && { variables })
             }),
             cache,
-            ...(tags && { next: { tags } })
+            ...(nextOptions && { next: nextOptions })
         });
 
         const body = await result.json();

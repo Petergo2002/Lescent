@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ShoppingBag, Check, Loader2 } from 'lucide-react';
 import { Product } from 'lib/shopify/types';
+import { getVersionedProductImageUrl } from 'lib/shopify/images';
 import { getProductImageAlt } from 'lib/seo';
 import { formatPrice, cn } from 'lib/utils';
 import { addItem } from 'components/cart/actions';
@@ -16,6 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
     const router = useRouter();
     
     const variantId = product.variants.edges[0]?.node.id;
+    const imageUrl = getVersionedProductImageUrl(product);
 
     const handleQuickAdd = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -47,9 +49,9 @@ export function ProductCard({ product }: { product: Product }) {
                 </div>
 
                 <Link href={`/products/${product.handle}`} className="relative block h-full w-full">
-                    {product.featuredImage && (
+                    {imageUrl && (
                         <Image
-                            src={product.featuredImage.url}
+                            src={imageUrl}
                             alt={getProductImageAlt(product)}
                             fill
                             className="object-contain object-center p-6 mix-blend-multiply transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03] sm:p-7"

@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTr
 import { Separator } from 'components/ui/separator';
 import { ScrollArea } from 'components/ui/scroll-area';
 import { Cart } from 'lib/shopify/types';
+import { getVersionedProductImageUrl } from 'lib/shopify/images';
 import { getProductImageAlt } from 'lib/seo';
 import { formatPrice } from 'lib/utils';
 import Image from 'next/image';
@@ -69,9 +70,9 @@ export function CartSheet({ cart }: { cart: Cart | undefined }) {
                                 {lines.map((item) => (
                                     <div key={item.id} className="flex gap-4">
                                         <div className="relative aspect-square h-24 w-24 min-w-[96px] overflow-hidden rounded-md border bg-background">
-                                            {item.merchandise.product.featuredImage && (
+                                            {getVersionedProductImageUrl(item.merchandise.product) && (
                                                 <Image
-                                                    src={item.merchandise.product.featuredImage.url}
+                                                    src={getVersionedProductImageUrl(item.merchandise.product)!}
                                                     alt={getProductImageAlt(item.merchandise.product)}
                                                     fill
                                                     className="object-contain p-2 mix-blend-multiply"

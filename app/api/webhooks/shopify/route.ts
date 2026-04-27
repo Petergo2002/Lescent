@@ -1,10 +1,30 @@
-import { revalidateTag } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import { TAGS } from 'lib/constants';
 import crypto from 'crypto';
 
 // Force Node.js runtime for crypto support
 export const runtime = 'nodejs';
+
+function revalidateProductPages(handle?: string) {
+    revalidateTag(TAGS.products, { expire: 0 });
+    revalidatePath('/');
+    revalidatePath('/products');
+    revalidatePath('/products/[handle]', 'page');
+
+    if (handle) {
+        revalidatePath(`/products/${handle}`);
+    }
+}
+
+function getWebhookProductHandle(body: string) {
+    try {
+        const payload = JSON.parse(body) as { handle?: unknown };
+        return typeof payload.handle === 'string' ? payload.handle : undefined;
+    } catch {
+        return undefined;
+    }
+}
 
 // Shopify webhook endpoint to clear cache when products change
 export async function POST(req: NextRequest) {
@@ -34,14 +54,13 @@ export async function POST(req: NextRequest) {
 
         // Revalidate product cache based on webhook topic
         if (topic?.includes('products')) {
-            // @ts-expect-error Next.js 16 type mismatch
-            revalidateTag(TAGS.products);
+            revalidateProductPages(getWebhookProductHandle(body));
             console.log('Product cache cleared');
         }
 
         if (topic?.includes('collections')) {
-            // @ts-expect-error Next.js 16 type mismatch
-            revalidateTag(TAGS.collections);
+            revalidateTag(TAGS.collections, { expire: 0 });
+            revalidatePath('/products');
             console.log('Collection cache cleared');
         }
 
