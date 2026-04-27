@@ -58,6 +58,9 @@ export function ProductGrid({ products }: { products: Product[] }) {
                 <p className="mx-auto max-w-2xl font-light leading-relaxed text-muted-foreground/90 md:text-lg">
                     Vårt hantverk förenar urgamla traditioner med modern lyx. Upplev skillnaden med ren parfymolja.
                 </p>
+                <p className="mx-auto max-w-xl text-xs font-light leading-relaxed tracking-wide text-muted-foreground/70">
+                    Fristående doftprofiler inspirerade av välkända doftfamiljer.
+                </p>
             </div>
 
             {/* Product Cards */}

@@ -38,6 +38,10 @@ export default async function ProductsPage() {
                         Inget vatten, ingen alkohol — bara ren personlighet.
                     </p>
 
+                    <p className="mx-auto max-w-xl text-xs font-light leading-relaxed tracking-wide text-muted-foreground/70 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
+                        Våra parfymer är fristående doftprofiler inspirerade av välkända doftfamiljer, utan koppling till designer- eller varumärkeshus.
+                    </p>
+
                     {/* Refresh Button - Only visible in development */}
                     {process.env.NODE_ENV === 'development' && (
                         <div className="flex justify-center pt-8">

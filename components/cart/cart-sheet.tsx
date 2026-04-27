@@ -68,13 +68,13 @@ export function CartSheet({ cart }: { cart: Cart | undefined }) {
                             <div className="flex flex-col gap-8 py-6">
                                 {lines.map((item) => (
                                     <div key={item.id} className="flex gap-4">
-                                        <div className="relative aspect-square h-24 w-24 min-w-[96px] overflow-hidden rounded-md border bg-secondary/10">
+                                        <div className="relative aspect-square h-24 w-24 min-w-[96px] overflow-hidden rounded-md border bg-background">
                                             {item.merchandise.product.featuredImage && (
                                                 <Image
                                                     src={item.merchandise.product.featuredImage.url}
                                                     alt={getProductImageAlt(item.merchandise.product)}
                                                     fill
-                                                    className="object-cover"
+                                                    className="object-contain p-2 mix-blend-multiply"
                                                 />
                                             )}
                                         </div>

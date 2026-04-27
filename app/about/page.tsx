@@ -97,10 +97,10 @@ export default function AboutPage() {
                             </div>
                             <div className="space-y-6 text-lg text-muted-foreground font-light leading-relaxed">
                                 <p>
-                                    Våra "Superior Dupes" skapas med kirurgisk precision. Vi analyserar originalens notprofiler, men istället för att späda ut dem med alkohol, extraherar vi de renaste oljorna för att skapa en intensivare och mer levande version.
+                                    Våra dofter skapas med noggrann precision. Vi arbetar med välkända doftfamiljer och notprofiler, men bygger varje parfymolja som en fristående doftprofil med egen karaktär.
                                 </p>
                                 <p>
-                                    Detta är hantverk i sin renaste form. Varje batch testas och förfinas tills doften inte bara matchar originalet, utan överträffar det i djup och hållbarhet.
+                                    Detta är hantverk i sin renaste form. Varje batch testas och förfinas för att ge en djup, mjuk och långvarig doftupplevelse utan alkohol.
                                 </p>
                                 <ul className="space-y-4 pt-4">
                                     {[

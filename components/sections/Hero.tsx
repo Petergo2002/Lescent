@@ -88,7 +88,7 @@ export function Hero() {
                 */}
                 <div className="absolute inset-0 z-0 h-full w-full md:relative md:w-1/2 md:inset-auto">
                     <Image
-                        src="/realhero_compreesd.png"
+                        src="/heronew.png"
                         alt="Lescent parfymolja i premiumutförande för oljebaserade parfymer"
                         fill
                         className="object-cover object-center"

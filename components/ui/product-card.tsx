@@ -36,7 +36,7 @@ export function ProductCard({ product }: { product: Product }) {
     return (
         <div className="group relative flex flex-col animate-in fade-in duration-700">
             {/* Image Container */}
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-[#F5F5F0]">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-background">
                 {/* Badges */}
                 <div className="absolute left-3 top-3 z-10 pointer-events-none">
                     {product.tags.includes('storsäljare') && (
@@ -52,7 +52,7 @@ export function ProductCard({ product }: { product: Product }) {
                             src={product.featuredImage.url}
                             alt={getProductImageAlt(product)}
                             fill
-                            className="object-cover object-center transition-transform duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110"
+                            className="object-contain object-center p-6 mix-blend-multiply transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03] sm:p-7"
                             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                         />
                     )}
@@ -108,7 +108,7 @@ export function ProductCard({ product }: { product: Product }) {
                 </Link>
                 
                 <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground/80 font-medium pb-1 text-center">
-                    {product.tags.filter(t => t !== 'storsäljare' && t !== 'parfymolja' && t !== 'alkoholfritt')[0] || 'Original'} Blend
+                    Inspirerad doftprofil
                 </p>
 
                 <div className="flex flex-col items-center gap-4 w-full pt-1">

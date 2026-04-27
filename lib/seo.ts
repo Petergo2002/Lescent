@@ -332,8 +332,7 @@ export function getProductTagline(product: Product) {
 }
 
 export function getProductImageAlt(product: Product) {
-    const seoContent = getProductSeoContent(product);
-    return `${product.title} parfymolja – oljebaserad doft inspirerad av ${seoContent.brand}`;
+    return `${product.title} parfymolja – oljebaserad doftprofil från Lescent`;
 }
 
 export function getProductFaqs(product: Product) {
@@ -345,8 +344,8 @@ export function getProductFaqs(product: Product) {
             answer: `${product.title} håller vanligtvis 8-12 timmar på huden beroende på hudtyp, mängd och var du applicerar den. På återfuktad hud sitter doften ofta ännu längre.`,
         },
         {
-            question: 'Är detta en kopia av originalet?',
-            answer: `Nej. Lescent säljer egna parfymoljor inspirerade av välkända dofter. ${product.title} är vår självständiga tolkning av ${seoContent.originalName} från ${seoContent.brand}.`,
+            question: 'Är detta en fristående doftprofil?',
+            answer: `Ja. Lescent säljer egna parfymoljor som fristående doftprofiler inspirerade av välkända noter och doftfamiljer. ${product.title} är inte kopplad till, godkänd av eller producerad av ${seoContent.brand}.`,
         },
         {
             question: 'Hur applicerar jag parfymoljan?',

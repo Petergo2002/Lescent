@@ -20,6 +20,27 @@ import {
 import { shopifyFetch } from './client';
 import { MOCK_CART, MOCK_PRODUCTS } from './mock-data';
 
+const PRODUCT_HANDLE_ALIASES: Record<string, string> = {
+    'ambre-nuit': 'ambre-suit'
+};
+
+const SHOPIFY_TO_PUBLIC_HANDLE = Object.entries(PRODUCT_HANDLE_ALIASES).reduce<Record<string, string>>(
+    (acc, [publicHandle, shopifyHandle]) => {
+        acc[shopifyHandle] = publicHandle;
+        return acc;
+    },
+    {}
+);
+
+const getShopifyHandle = (handle: string) => PRODUCT_HANDLE_ALIASES[handle] ?? handle;
+const getPublicHandle = (handle: string) => SHOPIFY_TO_PUBLIC_HANDLE[handle] ?? handle;
+
+const withPublicHandle = (product: Product): Product => {
+    const publicHandle = getPublicHandle(product.handle);
+
+    return publicHandle === product.handle ? product : { ...product, handle: publicHandle };
+};
+
 // Check if we are in mock mode (helper function)
 const isMockMode = () => !process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || !process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN;
 
@@ -111,7 +132,7 @@ export async function getProducts({
     reverse?: boolean;
     sortKey?: string;
 }): Promise<Product[]> {
-    if (isMockMode()) return MOCK_PRODUCTS;
+    if (isMockMode()) return MOCK_PRODUCTS.map(withPublicHandle);
 
     const res = await shopifyFetch<ShopifyProductsOperation>({
         query: getProductsQuery,
@@ -124,12 +145,15 @@ export async function getProducts({
         cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'force-cache'
     });
 
-    return res.body.data.products.edges.map((edge) => edge.node);
+    return res.body.data.products.edges.map((edge) => withPublicHandle(edge.node));
 }
 
 export async function getProduct(handle: string): Promise<Product | undefined> {
+    const shopifyHandle = getShopifyHandle(handle);
+
     if (isMockMode()) {
-        return MOCK_PRODUCTS.find((p) => p.handle === handle);
+        const product = MOCK_PRODUCTS.find((p) => p.handle === shopifyHandle);
+        return product ? withPublicHandle(product) : undefined;
     }
 
     try {
@@ -137,12 +161,14 @@ export async function getProduct(handle: string): Promise<Product | undefined> {
             query: getProductQuery,
             tags: [TAGS.products],
             variables: {
-                handle
+                handle: shopifyHandle
             },
             cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'force-cache'
         });
 
-        return res.body.data.product;
+        const product = res.body.data.product;
+
+        return product ? withPublicHandle(product) : undefined;
     } catch (error) {
         console.error('Error fetching product:', handle, error);
         throw error;

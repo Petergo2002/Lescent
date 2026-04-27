@@ -39,7 +39,7 @@ const CATEGORY_CONFIG: Record<CategoryKey, CategoryConfig> = {
     parfymolja: {
         badge: 'Oljebaserade Dofter',
         title: 'Parfymolja Online',
-        lead: 'Koncentrerade, alkoholfria parfymer som sitter kvar i 8–12 timmar. Inspirerade av världens mest eftertraktade dofter — i ett format som är mjukare, prisvärt och lätt att bära varje dag.',
+        lead: 'Koncentrerade, alkoholfria parfymer som sitter kvar i 8–12 timmar. Fristående doftprofiler inspirerade av välkända doftfamiljer — i ett format som är mjukare, prisvärt och lätt att bära varje dag.',
         benefits: [
             {
                 icon: <Clock className="h-5 w-5 text-evergreen" />,
@@ -61,7 +61,7 @@ const CATEGORY_CONFIG: Record<CategoryKey, CategoryConfig> = {
             heading: 'Varför parfymolja?',
             paragraphs: [
                 'Parfymolja har blivit ett självklart val för dig som vill ha en mer koncentrerad, långvarig och hudnära doftupplevelse. Till skillnad från traditionell sprayparfym innehåller oljebaserad parfym ingen uttorkande alkohol, vilket gör att doften utvecklas mjukare och sitter kvar längre på huden.',
-                'Hos Lescent hittar du parfymolja online inspirerad av några av världens mest eftertraktade dofter, men i ett format som känns mer intimt, prisvärt och lätt att bära varje dag. Våra parfymoljor passar både dig som söker en ny signaturdoft och dig som vill bygga en hel doftgarderob med olika uttryck för vardag, kväll och säsong.',
+                'Hos Lescent hittar du parfymolja online som fristående doftprofiler inspirerade av välkända doftfamiljer, men i ett format som känns mer intimt, prisvärt och lätt att bära varje dag. Våra parfymoljor passar både dig som söker en ny signaturdoft och dig som vill bygga en hel doftgarderob med olika uttryck för vardag, kväll och säsong.',
                 'Eftersom oljan binder bättre till hudens naturliga fukt räcker en liten mängd långt — ett smart val för både hållbarhet och ekonomi.',
             ],
         },

@@ -89,17 +89,20 @@ export default async function ProductPage({ params }: Props) {
 
             <div className="lg:flex">
                 {/* Bildytan hålls sticky på desktop för att produktinnehåll och SEO-text ska kunna växa. */}
-                <div className="relative w-full lg:w-1/2 lg:h-[calc(100vh-112px)] lg:sticky lg:top-28 h-[60vh] bg-secondary/5 overflow-hidden">
+                <div className="relative w-full lg:w-1/2 lg:h-[calc(100vh-112px)] lg:sticky lg:top-28 h-[60vh] bg-background overflow-hidden">
                     {imageUrl && (
                         <Image
                             src={imageUrl}
                             alt={getProductImageAlt(product)}
                             fill
-                            className="object-cover object-center scale-110"
+                            className="object-contain object-center p-8 mix-blend-multiply md:p-12 lg:p-16"
                             priority
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     )}
+                    <p className="absolute bottom-5 left-6 right-6 z-20 text-center text-[10px] font-light leading-relaxed text-muted-foreground/70 md:bottom-8 md:left-10 md:right-10">
+                        Produktbilden är en visualisering. Etikett och förpackningsdetaljer kan skilja sig något från faktisk produkt.
+                    </p>
                     <div className="absolute bottom-0 z-10 h-1/3 w-full bg-gradient-to-t from-background via-transparent to-transparent lg:hidden" />
                 </div>
 
@@ -109,12 +112,12 @@ export default async function ProductPage({ params }: Props) {
                         <div className="flex items-center gap-4">
                             <div className="h-[1px] w-8 bg-primary/20" />
                             <span className="text-muted-foreground text-sm tracking-[0.3em] uppercase font-medium">
-                                Inspirerad av {seoContent.brand}
+                                Inspirerad doftprofil
                             </span>
                         </div>
 
                         <h1 className="font-serif text-4xl lg:text-6xl font-medium leading-tight tracking-tight text-foreground">
-                            {product.title} – Parfymolja inspirerad av {seoContent.brand}
+                            {product.title}
                         </h1>
 
                         <p className="product-tagline text-sm uppercase tracking-[0.25em] text-muted-foreground">
@@ -125,6 +128,10 @@ export default async function ProductPage({ params }: Props) {
                             className="text-lg text-muted-foreground font-light leading-relaxed max-w-lg prose prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-em:text-foreground/80"
                             dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
                         />
+
+                        <p className="max-w-lg rounded-sm border border-black/10 bg-white/60 px-4 py-3 text-xs font-light leading-relaxed text-muted-foreground">
+                            En fristående doftprofil inspirerad av välkända noter. Lescent är inte kopplat till, godkänt av eller producerat av något designer- eller varumärkeshus.
+                        </p>
 
                         <div className="flex items-center gap-6 text-xl">
                             <p className="font-medium text-foreground">
@@ -161,7 +168,7 @@ export default async function ProductPage({ params }: Props) {
                     <section className="seo-text space-y-6 border-t border-black/10 pt-16">
                         <h2 className="font-serif text-3xl text-foreground">Om denna doftinspiration</h2>
                         <p className="text-muted-foreground leading-relaxed">
-                            {product.title} är vår oljebaserade tolkning av {seoContent.originalName} från {seoContent.brand}. Som alla våra parfymoljor är den fri från alkohol, vilket ger en mjukare och djupare doftupplevelse som håller längre på huden. Perfekt för dig som söker en långvarig parfymolja online till rätt pris.
+                            {product.title} är vår oljebaserade doftprofil inspirerad av välkända noter inom samma doftfamilj som {seoContent.originalName} från {seoContent.brand}. Som alla våra parfymoljor är den fri från alkohol, vilket ger en mjukare och djupare doftupplevelse som håller längre på huden. Perfekt för dig som söker en långvarig parfymolja online till rätt pris.
                         </p>
 
                         <h3 className="font-serif text-2xl text-foreground">Doftnoter</h3>
