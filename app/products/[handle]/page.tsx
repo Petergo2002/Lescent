@@ -96,12 +96,12 @@ export default async function ProductPage({ params }: Props) {
                             src={imageUrl}
                             alt={getProductImageAlt(product)}
                             fill
-                            className="object-contain object-center p-8 mix-blend-multiply md:p-12 lg:p-16"
+                            className="object-contain object-center p-8 pb-20 mix-blend-multiply md:p-12 lg:p-16"
                             priority
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     )}
-                    <p className="absolute bottom-5 left-6 right-6 z-20 text-center text-[10px] font-light leading-relaxed text-muted-foreground/70 md:bottom-8 md:left-10 md:right-10">
+                    <p className="absolute bottom-0 left-0 right-0 z-20 border-t border-black/10 bg-background/95 px-5 py-3 text-center text-[11px] font-light leading-5 text-muted-foreground/80 backdrop-blur-sm md:bottom-8 md:left-10 md:right-10 md:border-0 md:bg-transparent md:p-0 md:text-[10px] md:leading-relaxed md:text-muted-foreground/70 md:backdrop-blur-none">
                         Produktbilden är en visualisering. Etikett och förpackningsdetaljer kan skilja sig något från faktisk produkt.
                     </p>
                     <div className="absolute bottom-0 z-10 h-1/3 w-full bg-gradient-to-t from-background via-transparent to-transparent lg:hidden" />
