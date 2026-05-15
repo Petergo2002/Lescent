@@ -1,6 +1,7 @@
 'use server';
 
 import { addToCart, createCart, removeFromCart, updateCart } from 'lib/shopify';
+import { MAINTENANCE_COPY, MAINTENANCE_MODE } from 'lib/site-status';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 
@@ -17,6 +18,10 @@ export async function createCartAndSetCookie() {
 }
 
 export async function addItem(_prevState: unknown, selectedVariantId: string | undefined) {
+    if (MAINTENANCE_MODE) {
+        return MAINTENANCE_COPY.orderingPausedMessage;
+    }
+
     let cartId = await getCartId();
     let cart;
 
@@ -50,6 +55,10 @@ export async function updateItemQuantity(
         quantity: number;
     }
 ) {
+    if (MAINTENANCE_MODE) {
+        return MAINTENANCE_COPY.orderingPausedMessage;
+    }
+
     const cartId = await getCartId();
 
     if (!cartId) {
@@ -77,6 +86,10 @@ export async function updateItemQuantity(
 }
 
 export async function removeItem(_prevState: unknown, lineId: string) {
+    if (MAINTENANCE_MODE) {
+        return MAINTENANCE_COPY.orderingPausedMessage;
+    }
+
     const cartId = await getCartId();
 
     if (!cartId) {

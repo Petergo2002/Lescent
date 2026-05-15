@@ -5,6 +5,7 @@ import { Navbar } from 'components/layout/navbar';
 import { getCartId } from 'components/cart/actions';
 import { getCart } from 'lib/shopify';
 import { generateMetadata as generateSeoMetadata } from 'lib/seo';
+import { MAINTENANCE_MODE } from 'lib/site-status';
 import { cn } from 'lib/utils';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -18,6 +19,16 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    if (MAINTENANCE_MODE) {
+        return (
+            <html lang="sv">
+                <body className={cn(inter.variable, playfair.variable, 'min-h-screen bg-background font-sans antialiased relative')} suppressHydrationWarning={true}>
+                    <main>{children}</main>
+                </body>
+            </html>
+        );
+    }
+
     const cartId = await getCartId();
     const cart = cartId ? await getCart(cartId) : undefined;
 

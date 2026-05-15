@@ -28,6 +28,7 @@ Thumbs.db
 .agent/
 *.swp
 *.swo
+.playwright-mcp/
 
 # Build files
 .next 2/

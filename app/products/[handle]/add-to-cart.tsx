@@ -5,6 +5,7 @@ import { addItem } from 'components/cart/actions';
 import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
+import { MAINTENANCE_COPY, MAINTENANCE_MODE } from 'lib/site-status';
 
 export function AddToCart({ variantId, availableForSale }: { variantId: string; availableForSale: boolean }) {
     const [isPending, startTransition] = useTransition();
@@ -21,6 +22,14 @@ export function AddToCart({ variantId, availableForSale }: { variantId: string; 
         return (
             <Button disabled className="w-full py-6 text-lg" size="lg">
                 Slutsåld
+            </Button>
+        );
+    }
+
+    if (MAINTENANCE_MODE) {
+        return (
+            <Button disabled className="w-full py-6 text-lg" size="lg">
+                {MAINTENANCE_COPY.badge}
             </Button>
         );
     }

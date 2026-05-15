@@ -8,6 +8,7 @@ import { ScrollArea } from 'components/ui/scroll-area';
 import { Cart } from 'lib/shopify/types';
 import { getVersionedProductImageUrl } from 'lib/shopify/images';
 import { getProductImageAlt } from 'lib/seo';
+import { MAINTENANCE_COPY, MAINTENANCE_MODE } from 'lib/site-status';
 import { formatPrice } from 'lib/utils';
 import Image from 'next/image';
 import { useState, useTransition } from 'react';
@@ -55,6 +56,12 @@ export function CartSheet({ cart }: { cart: Cart | undefined }) {
                     <SheetDescription className="sr-only">Granska och hantera produkterna i din varukorg.</SheetDescription>
                 </SheetHeader>
 
+                {MAINTENANCE_MODE && (
+                    <div className="mr-6 mt-6 rounded-2xl border border-primary/10 bg-primary/5 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
+                        {MAINTENANCE_COPY.orderingPausedMessage}
+                    </div>
+                )}
+
                 {itemCount === 0 ? (
                     <div className="flex h-full flex-col items-center justify-center space-y-4 pr-6">
                         <ShoppingBag className="h-16 w-16 text-muted-foreground/50" />
@@ -91,7 +98,7 @@ export function CartSheet({ cart }: { cart: Cart | undefined }) {
                                                         size="icon"
                                                         className="h-8 w-8 rounded-full"
                                                         onClick={() => handleUpdateQuantity(item.id, item.merchandise.id, item.quantity - 1)}
-                                                        disabled={isPending}
+                                                        disabled={isPending || MAINTENANCE_MODE}
                                                     >
                                                         <Minus className="h-3 w-3" />
                                                     </Button>
@@ -101,7 +108,7 @@ export function CartSheet({ cart }: { cart: Cart | undefined }) {
                                                         size="icon"
                                                         className="h-8 w-8 rounded-full"
                                                         onClick={() => handleUpdateQuantity(item.id, item.merchandise.id, item.quantity + 1)}
-                                                        disabled={isPending}
+                                                        disabled={isPending || MAINTENANCE_MODE}
                                                     >
                                                         <Plus className="h-3 w-3" />
                                                     </Button>
@@ -113,7 +120,7 @@ export function CartSheet({ cart }: { cart: Cart | undefined }) {
                                                     <button
                                                         onClick={() => handleRemoveItem(item.id)}
                                                         className="text-xs text-muted-foreground underline-offset-4 hover:underline"
-                                                        disabled={isPending}
+                                                        disabled={isPending || MAINTENANCE_MODE}
                                                     >
                                                         Ta bort
                                                     </button>
@@ -140,11 +147,17 @@ export function CartSheet({ cart }: { cart: Cart | undefined }) {
                                     <span>{formatPrice(cart?.cost.totalAmount.amount || '0', cart?.cost.totalAmount.currencyCode || 'SEK')}</span>
                                 </div>
                             </div>
-                            <Button className="w-full py-6 text-lg" size="lg" asChild>
-                                <a href={cart?.checkoutUrl}>
-                                    TILL KASSAN
-                                </a>
-                            </Button>
+                            {MAINTENANCE_MODE ? (
+                                <Button className="w-full py-6 text-lg" size="lg" disabled>
+                                    Beställningar pausade
+                                </Button>
+                            ) : (
+                                <Button className="w-full py-6 text-lg" size="lg" asChild>
+                                    <a href={cart?.checkoutUrl}>
+                                        TILL KASSAN
+                                    </a>
+                                </Button>
+                            )}
                         </div>
                     </>
                 )}

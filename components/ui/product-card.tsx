@@ -8,6 +8,7 @@ import { ShoppingBag, Check, Loader2 } from 'lucide-react';
 import { Product } from 'lib/shopify/types';
 import { getVersionedProductImageUrl } from 'lib/shopify/images';
 import { getProductImageAlt } from 'lib/seo';
+import { MAINTENANCE_COPY, MAINTENANCE_MODE } from 'lib/site-status';
 import { formatPrice, cn } from 'lib/utils';
 import { addItem } from 'components/cart/actions';
 
@@ -68,15 +69,19 @@ export function ProductCard({ product }: { product: Product }) {
                     {/* Quick Add Button */}
                     <button 
                         onClick={handleQuickAdd}
-                        disabled={isPending}
+                        disabled={isPending || MAINTENANCE_MODE}
                         className={cn(
                             "flex w-full items-center justify-center gap-3 py-3 text-[10px] font-bold tracking-[0.25em] uppercase transition-all duration-300 shadow-2xl backdrop-blur-sm",
                             isAdded 
                                 ? "bg-custom-green/90 text-white" 
-                                : "bg-black/80 text-white hover:bg-black"
+                                : MAINTENANCE_MODE
+                                    ? "bg-black/40 text-white/80"
+                                    : "bg-black/80 text-white hover:bg-black"
                         )}
                     >
-                        {isPending ? (
+                        {MAINTENANCE_MODE ? (
+                            <span>{MAINTENANCE_COPY.badge}</span>
+                        ) : isPending ? (
                             <Loader2 className="h-4 w-4 animate-spin" />
                         ) : isAdded ? (
                             <>
@@ -122,15 +127,19 @@ export function ProductCard({ product }: { product: Product }) {
                     <div className="flex flex-col gap-2 w-full lg:hidden pt-2">
                         <button 
                             onClick={handleQuickAdd}
-                            disabled={isPending}
+                            disabled={isPending || MAINTENANCE_MODE}
                             className={cn(
                                 "flex w-full items-center justify-center gap-3 py-3 text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300",
                                 isAdded 
                                     ? "bg-custom-green text-white" 
-                                    : "bg-black text-white active:bg-black/90"
+                                    : MAINTENANCE_MODE
+                                        ? "bg-black/40 text-white/80"
+                                        : "bg-black text-white active:bg-black/90"
                             )}
                         >
-                            {isPending ? (
+                            {MAINTENANCE_MODE ? (
+                                <span>{MAINTENANCE_COPY.badge}</span>
+                            ) : isPending ? (
                                 <Loader2 className="h-4 w-4 animate-spin" />
                             ) : isAdded ? (
                                 <>
